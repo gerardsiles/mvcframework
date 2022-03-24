@@ -9,7 +9,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT (Links dinamicos)
-    define('URLROOT', 'http://localhost/php');
+    define('URLROOT', 'http://localhost/mvcframework');
 
     //nombre de la pagina web
     define('SITENAME', 'PHP con framework MVC');

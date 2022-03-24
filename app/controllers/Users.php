@@ -4,6 +4,23 @@ class Users extends controller {
         $this->userModel = $this->model('User');
     }
     
+    // Funcion para validar el registro
+    public function register() {
+        $data = [
+            'username' => '',
+            'email' => '',
+            'password' => '',
+            'confirmPassword' => '',
+            'usernameError' => '',
+            'emailError' => '',
+            'passwordError' => '',
+            'confirmPasswordError' => ''
+        ];
+
+        $this->view('users/register', $data);
+    }
+
+    // funcion para validar el login
     public function login() {
         $data = [
             'title' => 'Login',
