@@ -24,8 +24,11 @@ class Users extends controller {
 
                 // una vez limpiados los datos, lo agregamos a la array
                 $data = [
+                    'name' => trim($_POST['name']),
+                    'surname' => trim($_POST['surname']),
                     'username' => trim($d_POST['username']),
                     'email' => trim($_POST['email']),
+                    'number' => trim($_POST['number']),
                     'password' => trim($_POST['password']),
                     'confirmPassword' => trim($_POST['confirmPassword']),
                     'nameError' => '',
@@ -42,7 +45,7 @@ class Users extends controller {
                 $nameValidation = "/^[a-zA-Z]*$"; // esto es un regex que valida solamente caracteres
                 $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i"; // regex para validar contrasena con numeros
                 $phoneValidation = "/^d{9}";
-                $nifValidation = ""; //TODO
+                $nifValidation = "'/[0-9]{7,8}[A-Z]/'"; 
 
                 // comprobar que el nombre no este vacio
                 if(empty($data['name'])){
@@ -80,7 +83,9 @@ class Users extends controller {
                 // validar nif
                 if(empty($data['nif'])) {
                     $data['nifError'] = 'El nif no puede estar vacio';
-                }
+                } if (!preg_match($nifValidation, $data['nif'])){
+                    $data['nifError'] = 'Indroduzca un dni valido';
+                 }
 
                 // validar la contrasena, minimo de longitud y valores numericos
                 if(empty($data['password'])) {
