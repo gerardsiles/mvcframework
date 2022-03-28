@@ -1,139 +1,191 @@
 <?php
-class Users extends controller {
+class Users extends Controller {
     public function __construct() {
         $this->userModel = $this->model('User');
     }
-    
-    // Funcion para validar el registro
+
     public function register() {
         $data = [
+            'name' => '',
+            'surname' => '',
             'username' => '',
             'email' => '',
+            'telephone' => '',
+            'nif' => '',
             'password' => '',
             'confirmPassword' => '',
+            'nameError' => '',
+            'surnameError' => '',
             'usernameError' => '',
             'emailError' => '',
+            'phoneError' => '',
+            'nifError' => '',
             'passwordError' => '',
             'confirmPasswordError' => ''
         ];
 
-            // comprobamos si recibimos un metodo post para hacer el login
-            if($_SERVER['REQUEST_METHOD'] == $_POST) {
-                // sanitaze los datos por seguridad
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITAZE_STRING);
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Process form
+        // Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-                // una vez limpiados los datos, lo agregamos a la array
-                $data = [
-                    'name' => trim($_POST['name']),
-                    'surname' => trim($_POST['surname']),
-                    'username' => trim($d_POST['username']),
-                    'email' => trim($_POST['email']),
-                    'number' => trim($_POST['number']),
-                    'password' => trim($_POST['password']),
-                    'confirmPassword' => trim($_POST['confirmPassword']),
-                    'nameError' => '',
-                    'surnameError' => '',
-                    'usernameError' => '',
-                    'emailError' => '',
-                    'phoneError' => '',
-                    'passwordError' => '',
-                    'confirmPasswordError' => ''
-                ];
+              $data = [
+                'name' => trim($_POST['name']),
+                'surname' => trim($_POST['surname']),
+                'username' => trim($_POST['username']),
+                'email' => trim($_POST['email']),
+                'telephone' => trim($_POST['telephone']),
+                'nif' => trim($_POST['nif']),
+                'password' => trim($_POST['password']),
+                'confirmPassword' => trim($_POST['confirmPassword']),
+                'nameError' => '',
+                'surnameError' => '',
+                'usernameError' => '',
+                'emailError' => '',
+                'phoneError' => '',
+                'nifError' => '',
+                'passwordError' => '',
+                'confirmPasswordError' => ''
+            ];
 
-                // Validar datos
-                // Los nombres de los estudiantes solo deberian ser sus nombres formales, sin caracteres especiales ni numeros
-                $nameValidation = "/^[a-zA-Z]*$"; // esto es un regex que valida solamente caracteres
-                $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i"; // regex para validar contrasena con numeros
-                $phoneValidation = "/^d{9}";
-                $nifValidation = "'/[0-9]{7,8}[A-Z]/'"; 
+            $nameValidation = "/^[a-zA-Z]*$/";
+            $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
 
-                // comprobar que el nombre no este vacio
-                if(empty($data['name'])){
-                    $data['nameError'] = 'El nombre no puede estar vacio';
-                }
+            //Validar inputs del usuario
+            if (empty($data['name'])) {
+                $data['nameError'] = 'Entroduzca su nombre';
+            }
 
-                // comprobar que el apellido no este vacio
-                if(empty($data['surname'])) {
-                    $data['surnameError'] = 'El apellido no puede estar vacio';
-                }
+            if (empty($data['surname'])) {
+                $data['surnameError'] = 'Entroduzca su apellido';
+            }
 
-                // comprobar el nombre de usuario
-                if(empty($data['username'])) { // comprobamos si el nombre de usuario esta vacio
-                    $data['usernameError'] = 'El nombre de usuario no puede estar vacio';
-                } elseif(!preg_match($nameValidation, $data['username'])) {
-                    $data['usernameError'] = 'El nombre solo puede contener letras';
-                } // podrian existir dos estudiantes con el mismo nombre, no comprobamos si ya existe
+            if (empty($data['username'])) {
+                $data['usernameError'] = 'introduzca un usuario';
+            } elseif (!preg_match($nameValidation, $data['username'])) {
+                $data['usernameError'] = 'El usuario solo puede tener letras';
+            } else if($this->userModel->findUserByName($data['username'])) {
+                $data['usernameError'] = 'Este nombre de usuario ya existe';
+            }
 
-                // Validar el email
-                if(empty($data['email'])) {
-                    $data['emailError'] = 'Introduzca un email';
-                } elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) { // flitrar el email introducido y comprobar
-                    $data['emailError'] = 'Introduzca un email en un formato correcto';
-                } else {
-                    if (this->userModel->findUserByEmail($data['email'])) {
-                    $data['emailError'] = 'Este email ya existe';
-                    }
-                }
-
-                // validar telefono
-                if(empty($data['phone'])) {
-                    $data['phoneError'] = 'El numero de telefono no puede estar vacio';
-                }
-
-                // validar nif
-                if(empty($data['nif'])) {
-                    $data['nifError'] = 'El nif no puede estar vacio';
-                } if (!preg_match($nifValidation, $data['nif'])){
-                    $data['nifError'] = 'Indroduzca un dni valido';
-                 }
-
-                // validar la contrasena, minimo de longitud y valores numericos
-                if(empty($data['password'])) {
-                    $data['passwordError'] = 'Introduzca una contrasena';
-                } else if(strlen($data['password'] < 6)) {
-                    $data['passwordError'] = 'La contrasena debe ser de 8 caracteres minimo';
-                } else if(!preg_match($passwordValidation, $data['password'])) {
-                    $data['passwordError'] = "La contrasena debe tener como nimimo 1 caracter numerico";
-                }
-
-                // Validar confirmar contrasena
-                if(empty($data['password'])) {
-                    $data['passwordError'] = 'Introduzca una contrasena';
-                } else {
-                    if ($data['password'] != $data['confirmPassword']) {
-                        $data['passwordError'] = 'las contrasenas deben ser iguales';
-                    }
-                }
-
-                // comprobar que no hay errores antes de crear el usuario
-                if (empty($data['usernameError']) && empty($data['emailError']) && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
-                    // encriptar contrasena
-                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
-                    // Registrar usuario
-                    if ($this->userModel->register($data)) {
-                        // redirigin a login
-                        header('location: ' . URLROOT . '/users/login');
-                    } else {
-                        die('algo ha fallado, intentalo otra vez');
-                    }
+            if (empty($data['email'])) {
+                $data['emailError'] = 'introduzca su email';
+            } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                $data['emailError'] = 'introduce el formato correcto';
+            } else {
+                //Comprobar si el email existe
+                if ($this->userModel->findUserByEmail($data['email'])) {
+                $data['emailError'] = 'este email ya existe';
                 }
             }
 
+            if (empty($data['telephone'])) {
+                $data['phoneError'] = 'Entroduzca su telefono de contacto';
+            }
+
+            if (empty($data['nif'])) {
+                $data['nifError'] = 'Entroduzca su DNI o pasaporte';
+            }
+
+            if(empty($data['password'])){
+              $data['passwordError'] = 'introduzca una contrasena';
+            } elseif(strlen($data['password']) < 6){
+              $data['passwordError'] = 'la contrasena debe ser minimo de 8 caracteres';
+            } elseif (preg_match($passwordValidation, $data['password'])) {
+              $data['passwordError'] = 'la contrasena debe tener como minimo un valor numerico';
+            }
+
+             if (empty($data['confirmPassword'])) {
+                $data['confirmPasswordError'] = 'Introduzca la contrasena';
+            } else {
+                if ($data['password'] != $data['confirmPassword']) {
+                $data['confirmPasswordError'] = 'Las contrasenas no son iguales';
+                }
+            }
+
+            // antes de crear el usuario, comprobar que no hay errores
+            if (empty($data['nameError']) && empty($data['surnameError']) &&empty($data['usernameError']) 
+            && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError']) 
+            && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
+
+                // Hash contrasena
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                //registrar al usuario con el modelo
+                if ($this->userModel->register($data)) {
+                    //Redirigir al login
+                    header('location: ' . URLROOT . '/users/login');
+                } else {
+                    die('Salgo ha ido mal, vuelvelo a intentar mas tarde');
+                }
+            }
+        }
         $this->view('users/register', $data);
     }
 
-    // funcion para validar el login
     public function login() {
         $data = [
-            'title' => 'Login',
+            'username' => '',
+            'password' => '',
             'usernameError' => '',
             'passwordError' => ''
         ];
 
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //limpiar los datos de entrada
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        // cargar la vista de login
+            $data = [
+                'username' => trim($_POST['username']),
+                'password' => trim($_POST['password']),
+                'usernameError' => '',
+                'passwordError' => '',
+            ];
+
+            if (empty($data['username'])) {
+                $data['usernameError'] = 'Introduzca su usuario';
+            }
+
+            if (empty($data['password'])) {
+                $data['passwordError'] = 'Introduzca su contrasena';
+            }
+
+            //Comprobar que no hay errores
+            if (empty($data['usernameError']) && empty($data['passwordError'])) {
+                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
+
+                if ($loggedInUser) {
+                    $this->createUserSession($loggedInUser);
+                } else {
+                    $data['passwordError'] = 'El usuario o la contrasena son incorrectos';
+
+                    $this->view('users/login', $data);
+                }
+            }
+
+        } else {
+            $data = [
+                'username' => '',
+                'password' => '',
+                'usernameError' => '',
+                'passwordError' => ''
+            ];
+        }
         $this->view('users/login', $data);
+    }
+
+    public function createUserSession($user) {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['username'] = $user->username;
+        $_SESSION['email'] = $user->email;
+        header('location:' . URLROOT . '/pages/index');
+    }
+
+    public function logout() {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['username']);
+        unset($_SESSION['email']);
+        header('location:' . URLROOT . '/users/login');
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
     //Parametros de la base de datos
     define('DB_HOST','localhost');
-    define('DB_USER','gerard');
+    define('DB_USER','root');
     define('DB_PASS','password');
     define('DB_NAME','uoc-php');
 

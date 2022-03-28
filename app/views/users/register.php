@@ -10,7 +10,7 @@
 
 <div class="container-login">
     <div class="wrapper-login">
-        <h2>Registrate</h2>
+        <h2>Registrate al campus</h2>
         <form action="<?=URLROOT;?>/users/register" method="POST">
             <input type="text" placeholder="Nombre" name="name">
             <span class="invalidFeedback">
@@ -24,8 +24,6 @@
 
             <input type="text" placeholder="Nombre de usuario" name="username">
             <span class="invalidFeedback">
-                <!-- si el usuario introduce un nombre de usuario incorrecto
-            informamos que el formato es erroneo -->
                 <?=$data['usernameError'];?>
             </span>
 
@@ -34,7 +32,7 @@
                 <?=$data['emailError'];?>
             </span>
 
-            <input type="number" placeholder="Telefono" name="phone">
+            <input type="number" placeholder="Telefono" name="telephone">
             <span class="invalidFeedback">
                 <?=$data['phoneError'];?>
             </span>
@@ -56,7 +54,7 @@
                 <?=$data['confirmPasswordError'];?>
             </span>
 
-            <button id="submit" type="submit' value="submit">Iniciar sesion</button>
+            <button id="submit" type="submit' value="submit">Registrarse</button>
             <p class="options">tienes una cuenta? <a href="<?=URLROOT?>/users/login">inicia sesion aqui</p>
         </form>
     </div>
