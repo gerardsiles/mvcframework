@@ -3,6 +3,7 @@
         private $db;
 
         public function __construct() {
+            // conectar a la clase con la base de datos
             $this->db = new Database;
         }
 
@@ -71,5 +72,30 @@
                 return false;
             }
         }
+
+        public function changeUsername($newName) {
+
+            $username = $_SESSION['username'];
+            echo $username;
+
+            // $this->db->query('SELECT * FROM students WHERE username = :name');
+
+            // $this->db->bind(':name', $newName);
+
+            // if($this->db->rowCount() > 0){ 
+            //     // Si 
+            // } else {
+            //     return false;
+            // }
+        }
+
+        public function changeEmail() {
+            // TODO
+        }
+
+        public function changePassword() {
+            // TODO
+        }
+
 
     }

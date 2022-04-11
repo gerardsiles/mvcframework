@@ -1,24 +1,23 @@
 <nav class="top-nav">
     <ul>
         <li>
-            <a href="<?=URLROOT; ?>/pages/index">Home</a>
+            <a href="<?php echo URLROOT; ?>/index">Home</a>
         </li>
         <li>
-            <a href="<?=URLROOT; ?>/pages/about">About</a>
-        </li>        
+            <a href="<?php echo URLROOT; ?>/about">About</a>
+        </li>
         <li>
-            <a href="<?=URLROOT; ?>/pages/projects">Projects</a>
-        </li>        
+            <a href="<?php echo URLROOT; ?>/projects">Projects</a>
+        </li>
         <li>
-            <a href="<?=URLROOT; ?>/pages/contact">Contact</a>
-        </li>        
-        <li class="btn-login>
-        <?php if(isset($_SESSION['user_id'])) : ?>
-            <a href="<?=URLROOT; ?>/users/index">Cerrar Sesion</a>
+            <a href="<?php echo URLROOT; ?>/shcedule/index">Horarios</a>
+        </li>
+        <li class="btn-login">
+            <?php if(isset($_SESSION['user_id'])) : ?>
+                <a href="<?= URLROOT; ?>/users/logout">Log out</a>
             <?php else : ?>
-            <a href="<?=URLROOT; ?>/users/login">Iniciar sesion</a>
+                <a href="<?=URLROOT; ?>/users/login">Login</a>
             <?php endif; ?>
-
         </li>
     </ul>
 </nav>
