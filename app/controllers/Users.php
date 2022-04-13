@@ -24,6 +24,7 @@ class Users extends Controller {
             'confirmPasswordError' => ''
         ];
 
+        /* Funcion para el formulario de registro */
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
         // Sanitize POST data
@@ -104,8 +105,8 @@ class Users extends Controller {
             }
 
             // antes de crear el usuario, comprobar que no hay errores
-            if (empty($data['nameError']) && empty($data['surnameError']) &&empty($data['usernameError']) 
-            && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError']) 
+            if (empty($data['nameError']) && empty($data['surnameError']) &&empty($data['usernameError'])
+            && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError'])
             && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
 
                 // Hash contrasena
@@ -123,14 +124,18 @@ class Users extends Controller {
         $this->view('users/register', $data);
     }
 
+    /* Funcion para inicio de sesion */
     public function login() {
         $data = [
             'username' => '',
             'password' => '',
+            'user_type'=> '',
             'usernameError' => '',
-            'passwordError' => ''
+            'passwordError' => '',
+            'userTypeError' => ''
         ];
 
+        // Comprobar que nos lleue la informacion como post
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             //limpiar los datos de entrada
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -138,27 +143,31 @@ class Users extends Controller {
             $data = [
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
+                'user_type' => trim($_POST['user_type']),
                 'usernameError' => '',
                 'passwordError' => '',
+                'userTypeError' => ''
             ];
 
+            /* informar de errores en los datos introducidos */
             if (empty($data['username'])) {
-                $data['usernameError'] = 'Introduzca su usuario';
+                $data['usernameError'] = 'Usuario o contrasena incorrecto';
             }
 
             if (empty($data['password'])) {
-                $data['passwordError'] = 'Introduzca su contrasena';
+                $data['passwordError'] = 'Usuario o contrasena incorrecto';
             }
 
-            //Comprobar que no hay errores
+            /* Si no hay errores, intentar hacer el login */
             if (empty($data['usernameError']) && empty($data['passwordError'])) {
-                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
+                print_r($data);
+                $loggedInUser = $this->userModel->login($data['username'], $data['password'], $data['user_type']);
 
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
                 } else {
                     $data['passwordError'] = 'El usuario o la contrasena son incorrectos';
-
+                    $data['userTypeError'] = 'Comprueba que tu tipo de usuario sea correcto';
                     $this->view('users/login', $data);
                 }
             }
@@ -167,24 +176,34 @@ class Users extends Controller {
             $data = [
                 'username' => '',
                 'password' => '',
+                'user_type'=> '',
                 'usernameError' => '',
-                'passwordError' => ''
+                'passwordError' => '',
+                'userTypeError' => ''
             ];
         }
         $this->view('users/login', $data);
     }
 
-    public function createUserSession($user) {
+    /* Crear la sesion del usuario */
+    public function createUserSession($user,) {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
+        $_SESSION['user_type'] = $user->user_type;
+        /* Definir el tipo de usuario en un parametro de la sesion
+        $_SESSION['user_type'] = 'admin';
+        */
+        /* Redireccionar al index */
         header('location:' . URLROOT . '/pages/index');
     }
 
+    /* cerrar la sesion del usuario */
     public function logout() {
         unset($_SESSION['user_id']);
         unset($_SESSION['username']);
         unset($_SESSION['email']);
+        unset($_SESSION['user_type']);
         header('location:' . URLROOT . '/users/login');
     }
 

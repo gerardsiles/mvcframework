@@ -7,6 +7,7 @@
 - Se podrá modificar la base de datos añadiendo campos o tablas nuevas solamente si se quiere añadir alguna función adicional al proyecto, no para facilitar las funciones básicas.
 
 - FrontEnd: sitio web de contenido estático donde se presenta la aplicación y todas sus características junto con su funcionamiento.
+
 - Registro-Login: sistemas de alta del usuario en el sistema y de acceso (una vez dado de alta) a la aplicación web. En los casos que no se pueda dar de alta o acceder, el sistema debe mostrar los mensajes de error correspondientes. Si no es un usuario administrador, seleccionar qué cursos o ciclos está inscrito.
 
 registro de usuario[x] // Gerard
@@ -43,7 +44,19 @@ diferentes vistas[]
 ### Rubrica
 
 - Bases de datos
+
   - Se ha importado correctamente la base de datos y la conexión también es satisfactoria. Además se ha añadido alguna tabla correctamente para tener más funcionalidades.
+
+  Hemos agregado un campo a las tablas de students, teachers y users_admins con el valor user_type. Esto lo usamos para guardar que tipo de usuario ha hecho el login, y luego mostrar un menu con diferentes funcionalidades dependiendo del tipo de usuario que haya iniciado sesion en la aplicacion.
+
+```sql
+ALTER TABLE `students` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'student' AFTER `email`;
+
+ALTER TABLE `teachers` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'teacher' AFTER `email`;
+
+ALTER TABLE `users_admin` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'admin' AFTER `email`;
+```
+
 - FrontEnd
   - Presenta la aplicación y las características, con su funcionamiento y un diseño muy atractivo y visual.
 - Registro-Login
