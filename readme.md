@@ -24,11 +24,11 @@ logout[x] // gerard
 
 - Panel administración: una vez se accede como administrador, tendrá acceso al Panel Administración donde podrá crear nuevas asignaturas y cursos y configurar nuevas asignaturas en el horario. En este apartado se podrá configurar el día y hora de las clases, el color, junto con el profesor que la imparte y el curso al que pertenece. Se dará la opción de poder añadir, modificar y eliminar profesores, clases y cursos.
 
-pagina administracion[]
-mostrar datos mysql[]
-agregar datos[]
-modificar datos[]
-eliminar datos[]
+pagina administracion[] // Iago
+mostrar datos mysql[] // Iago
+agregar datos[]  // Iago
+modificar datos[] // Iago
+eliminar datos[] //Iago
 
 - Panel principal: una vez el usuario ha accedido correctamente a travésdel login, podrá ver un horario con las diferentes clases. Posibilidad de mostrar vista por semana, por dia y por mes. Cada usuario solo tendrá la opción de ver el calendario de los cursos que está impartiendo.
 
