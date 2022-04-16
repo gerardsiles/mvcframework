@@ -2,7 +2,6 @@
 Class Course {
 
 private $db;
-private $cursos;
 
    public function __construct() {
       $this->db = new Database;
@@ -18,7 +17,7 @@ private $cursos;
 
 
         // Metodo para comprobar si un name de curso existe en la base de datos
-        public function findUserByName($name) {
+        public function findCourseByName($name) {
             // Preparar query para la base de datos
             $this->db->query('SELECT * FROM courses WHERE name = :name');
 

@@ -54,6 +54,7 @@
                                             <button a href="<?=URLROOT;?>/courses/edit">Edit</button>
                                         </td>
 
+                                        <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
                                         <td>
                                                 <button a href="<?=URLROOT;?>/courses/edit">Delete</button>
                                         </td>

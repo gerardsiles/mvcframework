@@ -1,5 +1,4 @@
 <?php
-
 class Courses extends Controller {
         public function __construct() {
             // Llamar al modelo para recibir los datos en el controlador
@@ -28,7 +27,7 @@ class Courses extends Controller {
             'descriptionError' => '',
             'date_startError' => '',
             'date_endError' => '',
-            'activeError' => '',
+            'activeError' => ''
         ];
 
                    /* Funcion para el formulario de registro */
@@ -46,7 +45,7 @@ class Courses extends Controller {
                                             'descriptionError' => '',
                                             'date_startError' => '',
                                             'date_endError' => '',
-                                            'activeError' => '',
+                                            'activeError' => ''
                                         ];
                                     $nameValidation = "/^[a-zA-Z]*$/";
                                     $dataValidation = "/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/";
@@ -56,8 +55,8 @@ class Courses extends Controller {
                                     if (empty($data['name'])) {
                                         $data['nameError'] = 'Introduzca el nombre del curso';
                                     }elseif(!preg_match($nameValidation, $data['name'])){
-                                        $data['nameError'] = 'El usuario solo puede tener letras';
-                                    }else if($this->userModel->findUserByName($data['name'])){
+                                        $data['nameError'] = 'El curso solo puede tener letras';
+                                    }else if($this->courseModel->findCourseByName($data['name'])){
                                         $data['nameError'] = 'Este nombre de curso ya existe';
                                     }
 
@@ -97,7 +96,7 @@ class Courses extends Controller {
                                                         }
                                                     }
               }
-                        $this->view('courses/create', $data);
+                        $this->view('courses/addCourse', $data);
     }
 
 }

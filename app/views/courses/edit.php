@@ -7,7 +7,7 @@
     ?>
 </div>
 
-
+<!--
 <div class="container p-4">
     <div class="row">
         <div class="col-ms-4 mx-auto">
@@ -32,7 +32,7 @@
         </div>
     </div>
 </div>
-
+-->
 
 
 <div id="footer">

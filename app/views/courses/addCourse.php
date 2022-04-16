@@ -1,7 +1,7 @@
 <?php
     require APPROOT . '/views/includes/head.php';
 ?>
-<div id="section-landing">
+<div class="navbar">
     <?php
         require APPROOT . '/views/includes/navigation.php';
     ?>
@@ -40,11 +40,12 @@
 
 
             <button id="submit" type="submit" value="submit">Crear curso</button>
-
-        </form>
-          <div>
+            
+                    <div>
                     <p class="options">Volver al menu de cursos-><a href="<?=URLROOT?>/courses/index">Volver</p>
                     </div>
+        </form>
+
     </div>
 
 
