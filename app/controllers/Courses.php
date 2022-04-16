@@ -49,13 +49,11 @@ class Courses extends Controller {
                                         ];
                                     $nameValidation = "/^[a-zA-Z]*$/";
                                     $dataValidation = "/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/";
-                                    $activeValidation = "/^[0-1]$/";
+                                    $activeValidation = "/^[1-2]$/";
 
                                        //Validar inputs del usuario
                                     if (empty($data['name'])) {
                                         $data['nameError'] = 'Introduzca el nombre del curso';
-                                    }elseif(!preg_match($nameValidation, $data['name'])){
-                                        $data['nameError'] = 'El curso solo puede tener letras';
                                     }else if($this->courseModel->findCourseByName($data['name'])){
                                         $data['nameError'] = 'Este nombre de curso ya existe';
                                     }
@@ -66,20 +64,20 @@ class Courses extends Controller {
 
                                     if (empty($data['date_start'])) {
                                         $data['date_startError'] = 'Introduzca la fecha de inicio de curso';
-                                    }elseif(!preg_match($dateValidation, $data['date_start'])){
-                                        $data['date_startError'] = 'Utilice el siguiente formato: AAAA-MM-DD. Fecha inicio';
+                                    }elseif(!preg_match($dataValidation, $data['date_start'])){
+                                       $data['date_startError'] = 'Utilice el siguiente formato: AAAA-MM-DD. Fecha inicio';
                                     }
 
                                     if (empty($data['date_end'])) {
                                         $data['date_endError'] = 'Introduzca la fecha de fin de curso';
-                                    }elseif(!preg_match($dateValidation, $data['date_end'])){
-                                        $data['date_endError'] = 'Utilice el siguiente formato: AAAA-MM-DD. Fecha fin.';
+                                    }elseif(!preg_match($dataValidation, $data['date_end'])){
+                                       $data['date_startError'] = 'Utilice el siguiente formato: AAAA-MM-DD. Fecha fin';
                                     }
 
                                         if (empty($data['active'])) {
                                         $data['activeError'] = 'Introduzca si el curso está activo';
                                     }elseif(!preg_match($activeValidation, $data['active'])){
-                                        $data['activeError'] = 'Escriba 1 o 0.';
+                                        $data['activeError'] = 'Escriba 1 (para activo) o 2 para (inactivo).';
                                     }
 
                                                     // antes de crear el usuario, comprobar que no hay errores

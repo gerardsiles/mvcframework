@@ -11,7 +11,7 @@
 <div class="container-login">
     <div class="wrapper-login">
         <h2>Formulario: Crear un nuevo curso</h2>
-        <form action="<?=URLROOT;?>/courses/create" method="POST">
+        <form action="<?=URLROOT;?>/courses/addCourse" method="POST">
             <input type="text" placeholder="Nombre" name="name">
             <span class="invalidFeedback">
                 <?=$data['nameError'];?>
@@ -40,7 +40,7 @@
 
 
             <button id="submit" type="submit" value="submit">Crear curso</button>
-            
+
                     <div>
                     <p class="options">Volver al menu de cursos-><a href="<?=URLROOT?>/courses/index">Volver</p>
                     </div>
