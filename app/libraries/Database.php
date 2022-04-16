@@ -23,7 +23,7 @@
             }
         }
 
-        //Escribir las query
+        //Nos permite Escribir las query
         public function query($sql) {
             $this->statement = $this->dbHandler->prepare($sql);
         }

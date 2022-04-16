@@ -1,14 +1,22 @@
 <?php
     require APPROOT . '/views/includes/head.php';
 ?>
-
-<div class="navbar">
+<div id="section-landing">
     <?php
         require APPROOT . '/views/includes/navigation.php';
     ?>
 </div>
 
 
-<div class="wrapper-landing">
-    <h2>Perfil</h2>
+
+
+
+
+
+
+
+<div id="footer">
+    <?php
+        require APPROOT . '/views/includes/footer.php';
+    ?>
 </div>

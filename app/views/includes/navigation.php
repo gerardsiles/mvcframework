@@ -15,7 +15,7 @@
         </li>
         <li>
             <?php if(isset($_SESSION['user_type']) == 'student') : ?>
-            <a href="<?= URLROOT; ?>/shcedule/index">Horarios</a>
+            <a href="<?= URLROOT; ?>/shcedules/index">Horarios</a>
             <?php endif; ?>
         </li>
         <li>
