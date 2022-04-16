@@ -63,7 +63,9 @@ ALTER TABLE `users_admin` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE
 
   - El registro y el login funcionan correctamente y da los mensajes de error pertinentes.
 
-  El acceso a la base de datos es correcto, y la insercion y recoleccion de datos del usuario funcionan correctamente. Ademas, hemos implementeado en el modelo el mostrar los errores pertinentes en cada situacion. En el caso del login, para evitar el uso mailicioso de conseguir usuarios o contrasenas, solamente informamos que el usuario o la contrasena es incorrecto
+  El acceso a la base de datos es correcto, y la insercion y recoleccion de datos del usuario funcionan correctamente. Ademas, hemos implementeado en el modelo el mostrar los errores pertinentes en cada situacion.
+
+  En el caso del login, para evitar el uso mailicioso de conseguir usuarios o contrasenas, solamente informamos que el usuario o la contrasena es incorrecto
 
   ```php
     if (empty($data['username'])) {
@@ -75,7 +77,14 @@ ALTER TABLE `users_admin` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE
     }
   ```
 
-  Podemos ver otro ejemplo en el registro del usuario:
+  Ademas, los datos recibidos son filtrados y limpiados para evitar las inyecciones SQL
+
+  ```php
+   // Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  ```
+
+  Podemos ver otro ejemplo en el registro del usuario, mostrando los errores pertinentes de cada campo necesario:
 
   ```php
     if(empty($data['password'])){
@@ -85,6 +94,13 @@ ALTER TABLE `users_admin` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE
     } elseif (preg_match($passwordValidation, $data['password'])) {
     $data['passwordError'] = 'la contrasena debe tener como minimo un valor numerico';
     }
+  ```
+
+  Tambien podemos ver el uso de regex para validar los campos del nombre de usuario y la contrasena:
+
+  ```php
+    $nameValidation = "/^[a-zA-Z]*$/";
+    $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
   ```
 
 - Panel de administracion
