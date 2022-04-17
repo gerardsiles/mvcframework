@@ -59,11 +59,13 @@
         </form>
     </div>
 
-    <div class="footer">
+
+
+</div>
+
+<div class="footer">
         <?php
             require APPROOT . '/views/includes/footer.php';
         ?>
     </div>
-
-</div>
 

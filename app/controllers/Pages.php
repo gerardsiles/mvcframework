@@ -10,6 +10,6 @@ class Pages extends Controller {
 
         ];
 
-        $this->view('courses/index', $data);
+        $this->view('index', $data);
     }
 }

@@ -8,7 +8,8 @@
 </div>
 
 
-    <div>
+    <div class="container-login">
+        <div class="wrapper-login">
         <table>
                     <thead>
                         <tr>
@@ -51,7 +52,11 @@
 
                                         <td>
                                         <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
-                                            <button a href="<?=URLROOT;?>/courses/edit">Edit</button>
+                                             
+                                            <a class="btn"
+                                            href="<?=URLROOT;?>/courses/update/<?=$course->id_course?>">
+                                                Edit
+                                            </a>
                                         </td>
 
                                         <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
@@ -62,24 +67,15 @@
                                     </tr>
                         </tbody>
         </table>
-    </div>
-
-<div>
+                
+        <div>
 
 <a href="<?=URLROOT;?>/courses/addCourse"><input type="button" value="Crear un curso"></a>
 
 </div>
+    </div>
 
-<!--
-<div class="container">
-    <?php foreach($data['courses'] as $course): ?>
-        <div class="container-item">
-            <h2>
-                <?= $course->name; ?>
-            </h2>
-        </div>
-    <?php endforeach; ?>
-</div>-->
+
 
 
 
