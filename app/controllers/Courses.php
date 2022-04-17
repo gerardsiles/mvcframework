@@ -95,16 +95,16 @@ class Courses extends Controller {
                         $this->view('courses/addCourse', $data);
     }
 
+    
     public function update($id_course) {
        $course = $this->courseModel->findCourseById($id_course);
-    
-
+   
         $data = [
             'course' => $course,
             'name' => '',
             'description' => '',
             'date_start' => '',
-            'date-end' => '',
+            'date_end' => '',
             'active' => '',
             'nameError' => '',
             'descriptionError' => '',
@@ -118,9 +118,7 @@ class Courses extends Controller {
                         // Sanitize POST data
                         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                         $data = [
-
                                     'id_course' => $id_course,
-                                    'course' =>$course,
                                     'name' => trim($_POST['name']),
                                     'description' => trim($_POST['description']),
                                     'date_start' => trim($_POST['date_start']),
@@ -166,8 +164,8 @@ class Courses extends Controller {
                                             && empty($data['date_endError'])) {
 
 
-                                                //registrar al usuario con el modelo
-                                                if ($this->courseModel->addCourse($data)) {
+                                                //registrar el curso en el modelo
+                                                if ($this->courseModel->update($data)) {
                                                     //Redirigir al index de cursos
                                                     header('location: ' . URLROOT . '/courses/index');
                                                 } else {
@@ -177,10 +175,9 @@ class Courses extends Controller {
                                                 $this->view('courses/update', $data);
                                             }
                                         }
+                                        
+                                        
                 $this->view('courses/update', $data);
-    
-
-
 
     }
 
