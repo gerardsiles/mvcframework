@@ -184,22 +184,37 @@ class Courses extends Controller {
 
 
 
-    public function deleteCourse(){
+    public function delete($id_course){
+        $course = $this->courseModel->findCourseById($id_course);
+   
+        $data = [
+            'course' => $course,
+            'name' => '',
+            'description' => '',
+            'date_start' => '',
+            'date_end' => '',
+            'active' => '',
+            'nameError' => '',
+            'descriptionError' => '',
+            'date_startError' => '',
+            'date_endError' => '',
+            'activeError' => ''
+        ];
 
 
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                // Process form
+                // Sanitize POST data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                if($this->courseModel->delete($id_course)){
+                    header('location: ' . URLROOT . '/courses/index');
+
+                } else {
+                    die('Algo ha ido mal, vuelvelo a intentar mas tarde');
+                }
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

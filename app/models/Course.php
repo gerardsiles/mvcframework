@@ -84,6 +84,18 @@ private $db;
         }
 
 
+        public function delete($id_course){
+
+            $this->db->query('DELETE FROM courses WHERE id_course = :id_course');
+
+            $this->db->bind(':id_course', $id_course);
+
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         
 

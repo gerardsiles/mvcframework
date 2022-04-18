@@ -61,7 +61,9 @@
 
                                         <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
                                         <td>
-                                                <button a href="<?=URLROOT;?>/courses/edit">Delete</button>
+                                                <form action="<?=URLROOT;?>/courses/delete/<?=$course->id_course?>" method="POST">
+                                                    <input type="submit" name="delete" value="Delete" class="btn">
+                                                </form>
                                         </td>
                                         <?php endforeach; ?>
                                     </tr>
