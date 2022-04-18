@@ -53,10 +53,10 @@
                                         <td>
                                         <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
                                              
-                                            <a class="btn"
-                                            href="<?=URLROOT;?>/courses/update/<?=$course->id_course?>">
+                                            <button class ='btn'>
+                                           <a href="<?=URLROOT;?>/courses/update/<?=$course->id_course?>">
                                                 Edit
-                                            </a>
+                                            </button>
                                         </td>
 
                                         <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
