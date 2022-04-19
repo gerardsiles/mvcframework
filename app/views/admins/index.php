@@ -8,16 +8,33 @@
 </div>
 
 <div class="container-login">
-        <div class="wrapper-login">
+    <div class="wrapper-login">
+
         <div class="box" style="margin: 5em; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">
 	
-    <div class="card" style=" width: 18rem; ">
-        <div class="card-body">
-            <h5 class="card-title">Cursos</h5>
-            <p class="card-text">Gestiona los cursos</p>
-            <button class ='btn'>
-            <a href="<?=URLROOT;?>/courses/index">Entrar</a>
-            </button>
+            <div class="card" style=" width: 18rem; ">
+                <div class="card-body">
+                    <h5 class="card-title">Cursos</h5>
+                    <p class="card-text">Gestiona los cursos</p>
+
+                    <button class ='btn'>
+                    <a href="<?=URLROOT;?>/courses/index">Entrar</a>
+                    </button>
+
+                 </div>
+            </div>
+
+            <div class="card" style=" width: 18rem; ">
+                <div class="card-body">
+                    <h5 class="card-title">Profesores</h5>
+                    <p class="card-text">Gestiona los profesores</p>
+
+                    <button class ='btn'>
+                    <a href="<?=URLROOT;?>/teachers/index">Entrar</a>
+                    </button>
+
+                 </div>
+            </div>
         </div>
     </div>
 

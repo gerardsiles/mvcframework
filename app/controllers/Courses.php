@@ -213,7 +213,7 @@ class Courses extends Controller {
                 } else {
                     die('Algo ha ido mal, vuelvelo a intentar mas tarde');
                 }
-        }
+            }
     }
 
 

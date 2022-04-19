@@ -61,7 +61,7 @@
         </form>
 
         <div>
-            <a href="<?=URLROOT;?>/courses/index"><input type="button" value="Volver"></a>
+            <a href="<?=URLROOT;?>/teachers/index"><input type="button" value="Volver"></a>
         </div>
     </div>
 

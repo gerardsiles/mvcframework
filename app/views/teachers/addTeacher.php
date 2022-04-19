@@ -10,39 +10,45 @@
 
 <div class="container-login">
     <div class="wrapper-login">
-        <h2>Formulario: Crear un nuevo curso</h2>
-        <form action="<?=URLROOT;?>/courses/addCourse" method="POST">
+        <h2>Formulario: Crear un nuevo profesor</h2>
+        <form action="<?=URLROOT;?>/teachers/addTeacher" method="POST">
             <input type="text" placeholder="Nombre" name="name">
             <span class="invalidFeedback">
                 <?=$data['nameError'];?>
             </span>
 
-            <input type="text" placeholder="Descripcion" name="description">
+            <input type="text" placeholder="Apellido" name="surname">
             <span class="invalidFeedback">
-                <?=$data['descriptionError'];?>
+                <?=$data['surnameError'];?>
             </span>
 
-            <input type="date" placeholder="Fecha de inicio de curso" name="date_start">
+            <input type="text" placeholder="Telefono" name="telephone">
             <span class="invalidFeedback">
-                <?=$data['date_startError'];?>
+                <?=$data['telephoneError'];?>
             </span>
 
-            <input type="date" placeholder="Fecha de fin de curso" name="date_end">
+            <input type="text" placeholder="NIF" name="nif">
             <span class="invalidFeedback">
-                <?=$data['date_endError'];?>
+                <?=$data['nifError'];?>
             </span>
+
+
+            <input type="text" placeholder="Email" name="email">
+            <span class="invalidFeedback">
+                <?=$data['emailError'];?>
+            </span>
+
             <br>
 
-           <label for="number">Selecciona si está activo o no.</label>
-                 <select id="active" name="active">
-                 <option value=0>No activo</option>
-                 <option value=1>Activo</option>
+           <label for="text">Tipo de usuario</label>
+                 <select id="user_type" name="user_type">
+                 <option value="teacher">Profesor</option>
                  </select>
 
             <br>
 
 
-            <button id="submit" type="submit" value="submit">Crear curso</button>
+            <button id="submit" type="submit" value="submit">Crear profesor</button>
 
 
         </form>
