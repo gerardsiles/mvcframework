@@ -9,7 +9,7 @@
             <!-- comprobar si la sesion es de admin para mostrar su enlace -->
             <?php if(isset($_SESSION['user_type'])) : ?>
                 <?php if($_SESSION['user_type'] == 'admin') : ?>
-            <a href="<?= URLROOT; ?>/admins/index">Administracion</a>
+            <a href="<?= URLROOT; ?>/admins/menu">Administracion</a>
                 <?php endif; ?> 
             <?php endif; ?>
         </li>
