@@ -29,21 +29,9 @@
             }
         }
 
-        /* Funcion para encontrar el tipo de usuario (estudiante, profesor o admin) */
-        private function userType($username) {
-            $this->db->query('SELECT * FROM users where username = :username');
-            $this->db->bind(':username', $username);
-            $row = $this->db->single();
-            $userType = $row['userType'];
-            return $userType;
-        }
+        public function login($username, $password) {
 
-        public function login($username, $password, $userType) {
-            /* Recoger el tipo de usuario */
-            // $userType = $this->userType($username);
-
-            if ($userType == 'student') {
-                $this->db->query('SELECT * FROM students  WHERE username = :username');
+                $this->db->query('SELECT * FROM users  WHERE username = :username');
                 $this->db->bind(':username', $username);
 
                 $row = $this->db->single();
@@ -56,55 +44,6 @@
                 } else {
                     return false;
                 }
-
-            } elseif($userType == 'teacher') {
-                $this->db->query('SELECT * FROM teachers  WHERE username = :username');
-                $this->db->bind(':username', $username);
-
-                $row = $this->db->single();
-
-                /* Comprobar la contrasena hashed si hace match */
-                $hashedPassword = $row->pass;
-
-                if (password_verify($password, $hashedPassword)) {
-                    return $row;
-                } else {
-                    return false;
-                }
-            } else {
-                $this->db->query('SELECT * FROM users_admin  WHERE username = :username');
-                $this->db->bind(':username', $username);
-
-                $row = $this->db->single();
-
-                /* Comprobar la contrasena hashed si hace match */
-                $hashedPassword = $row->password;
-                echo $hashedPassword;
-                
-
-                if (password_verify($password, $hashedPassword)) {
-                    echo 'true';
-
-                    return $row;
-                } else {
-                    echo 'false';
-
-                    return false;
-                }
-            }
-            // $this->db->query('SELECT * FROM students  WHERE username = :username');
-            // $this->db->bind(':username', $username);
-
-            // $row = $this->db->single();
-
-            // /* Comprobar la contrasena hashed si hace match */
-            // $hashedPassword = $row->pass;
-
-            // if (password_verify($password, $hashedPassword)) {
-            //     return $row;
-            // } else {
-            //     return false;
-            // }
 
         }
 

@@ -5,41 +5,52 @@
   crear la conexion en Database.php[x]
 
 - Se podrá modificar la base de datos añadiendo campos o tablas nuevas solamente si se quiere añadir alguna función adicional al proyecto, no para facilitar las funciones básicas.
+  La propuesta de base de datos ofrecida, presenta varios problemas en la normalizacion de los datos y en la organizacion de la informacion. Tras contemplar varias opciones para solucionar
+  este problema, hemos decidido quedarnos con la tabla students, renombrarla a users, y alli hemos agregado una columna que es user_type, con los valores de student, teacher y admin.
+
+Esta decision se ha tomado basandonos en la homogeneidad de los datos, y un control sobre las operaciones sobre la misma base de datos asegurando la integridad de la misma.
+las otras opciones contempladas, solo incrementaban la complejidad y los costes de la estructura, haciendo estas otras opciones las menos viables.
+
+estos son los cambios generados en la base de datos:
+
+```sql
+
+```
 
 - FrontEnd: sitio web de contenido estático donde se presenta la aplicación y todas sus características junto con su funcionamiento.
 
 - Registro-Login: sistemas de alta del usuario en el sistema y de acceso (una vez dado de alta) a la aplicación web. En los casos que no se pueda dar de alta o acceder, el sistema debe mostrar los mensajes de error correspondientes. Si no es un usuario administrador, seleccionar qué cursos o ciclos está inscrito.
 
-registro de usuario[x] // Gerard
-login de usuario [x] // Gerard
-redireccionar al usuario[]
-menu usuario[]
-login de profesor[] // Gerard
-redireccionar al profesor[]
-Menu profesor[]
-login de admin[]
-redireccionar al admin[]
-menu usuario[]
-logout[x] // gerard
+registro de usuario[x] // Gerard <br>
+login de usuario [x] // Gerard<br>
+redireccionar al usuario[]<br>
+menu usuario[]<br>
+login de profesor[] // Gerard<br>
+redireccionar al profesor[]<br>
+Menu profesor[]<br>
+login de admin[]<br>
+redireccionar al admin[]<br>
+menu usuario[]<br>
+logout[x] // gerard<br>
 
 - Panel administración: una vez se accede como administrador, tendrá acceso al Panel Administración donde podrá crear nuevas asignaturas y cursos y configurar nuevas asignaturas en el horario. En este apartado se podrá configurar el día y hora de las clases, el color, junto con el profesor que la imparte y el curso al que pertenece. Se dará la opción de poder añadir, modificar y eliminar profesores, clases y cursos.
 
-pagina administracion[] // Iago
-mostrar datos mysql[] // Iago
-agregar datos[]  // Iago
-modificar datos[] // Iago
-eliminar datos[] //Iago
+pagina administracion[] // Iago<br>
+mostrar datos mysql[] // Iago<br>
+agregar datos[] // Iago<br>
+modificar datos[] // Iago<br>
+eliminar datos[] //Iago<br>
 
 - Panel principal: una vez el usuario ha accedido correctamente a travésdel login, podrá ver un horario con las diferentes clases. Posibilidad de mostrar vista por semana, por dia y por mes. Cada usuario solo tendrá la opción de ver el calendario de los cursos que está impartiendo.
 
-pagina horarios[]
-diferentes vistas[]
+pagina horarios[]<br>
+diferentes vistas[]<br>
 
 - Perfil: sistema de configuración del usuario: modificación del nombre de usuario, correo electrónico y contraseña.
-  pagina de perfil[]
-  modificacion del nombre[]
-  modificacion correo electronico[]
-  modificacion contrasena[]
+  pagina de perfil[]<br>
+  modificacion del nombre[]<br>
+  modificacion correo electronico[]<br>
+  modificacion contrasena[]<br>
 
 ### Rubrica
 

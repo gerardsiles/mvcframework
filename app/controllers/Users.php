@@ -161,7 +161,7 @@ class Users extends Controller {
             /* Si no hay errores, intentar hacer el login */
             if (empty($data['usernameError']) && empty($data['passwordError'])) {
                 print_r($data);
-                $loggedInUser = $this->userModel->login($data['username'], $data['password'], $data['user_type']);
+                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
 
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
