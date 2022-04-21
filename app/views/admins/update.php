@@ -59,7 +59,7 @@
         </form>
 
         <div>
-            <a href="<?=URLROOT;?>/admins/index"><input type="button" value="Volver"></a>
+            <a href="<?=URLROOT;?>/admins/menu"><input type="button" value="Volver"></a>
         </div>
     </div>
 

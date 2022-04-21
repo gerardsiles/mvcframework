@@ -5,22 +5,22 @@ class Admins extends Controller {
             $this->adminModel = $this->model('Admin');
         }
 
-    public function menu() {
+    public function index() {
            //$admins = $this->courseAdmin->getAdmins();
             $data = [
                // 'admins' => $admins
             ];
 
-            $this->view('admins/menu', $data);
+            $this->view('admins/index', $data);
     }
 
-    public function index() {
+    public function menu() {
         $admins = $this->adminModel->getAdmins();
          $data = [
              'admins' => $admins
          ];
 
-         $this->view('admins/index', $data);
+         $this->view('admins/menu', $data);
  }
 
 
@@ -94,7 +94,7 @@ class Admins extends Controller {
                                                      //registrar al usuario con el modelo
                                                      if ($this->adminModel->addAdmin($data)) {
                                                          //Redirigir al index de cursos
-                                                         header('location: ' . URLROOT . '/admins/index');
+                                                         header('location: ' . URLROOT . '/admins/menu');
                                                      } else {
                                                          die('Algo ha ido mal, vuelvelo a intentar mas tarde');
                                                      }
@@ -180,7 +180,7 @@ class Admins extends Controller {
                                               //registrar el curso en el modelo
                                               if ($this->adminModel->update($data)) {
                                                   //Redirigir al index de cursos
-                                                  header('location: ' . URLROOT . '/admins/index');
+                                                  header('location: ' . URLROOT . '/admins/menu');
                                               } else {
                                                   die('Algo ha ido mal, vuelvelo a intentar mas tarde');
                                               }
@@ -219,7 +219,7 @@ class Admins extends Controller {
               $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
               if($this->adminModel->delete($id_user_admin)){
-                  header('location: ' . URLROOT . '/admins/index');
+                  header('location: ' . URLROOT . '/admins/menu');
 
               } else {
                   die('Algo ha ido mal, vuelvelo a intentar mas tarde');

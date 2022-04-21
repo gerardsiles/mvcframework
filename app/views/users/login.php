@@ -38,7 +38,7 @@
                 <?=$data['userTypeError'];?>
             </span>
 
-            <button id="submit" type="submit' value="submit">Iniciar sesion</button>
+            <button id="submit" type="submit" value="submit">Iniciar sesion</button>
             <p class="options">Todavia no tienes una cuenta? <a href="<?=URLROOT;?>/users/register">registrate aqui</p>
         </form>
     </div>

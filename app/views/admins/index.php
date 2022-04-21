@@ -7,81 +7,58 @@
     ?>
 </div>
 
+<div class="container-login">
+    <div class="wrapper-login">
+        <div class="box" style="margin: 5em; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">
+	
+                    <div class="card" style=" width: 18rem; ">
+                        <div class="card-body">
+                            <h5 class="card-title">Cursos</h5>
+                            <p class="card-text">Gestiona los cursos</p>
 
-    <div class="container-login">
-        <div class="wrapper-login">
-        <table>
-                    <thead>
-                        <tr>
-                            <th>Id_User_Admin</th>
-                            <th>UserName</th>
-                            <th>name</th>
-                            <th>Email</th>
-                            <th>Uer_Type</th>
-                            <th>Password</th>
+                            <button class ='btn'>
+                            <a href="<?=URLROOT;?>/courses/index">Entrar</a>
+                            </button>
 
-                            <th>Editar</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
+                        </div>
+                    </div>
 
-                        <tbody>
-                        <?php foreach($data['admins'] as $admin): ?>
-                                    <tr>
+                    <div class="card" style=" width: 18rem; ">
+                        <div class="card-body">
+                            <h5 class="card-title">Profesores</h5>
+                            <p class="card-text">Gestiona los profesores</p>
 
-                                        <th><?= $admin->id_user_admin; ?></th>
+                            <button class ='btn'>
+                            <a href="<?=URLROOT;?>/teachers/index">Entrar</a>
+                            </button>
 
-                                        <td >
-                                            <?= $admin->username; ?>
-                                        </td>
-
-                                        <td>
-                                            <?= $admin->name; ?>
-                                        </td>
-
-                                        <td>
-                                            <?= $admin->email; ?>
-                                        </td>
-
-                                        <td>
-                                            <?= $admin->user_type; ?>
-                                        </td>
-
-                                        <td>
-                                            <?= $admin->password; ?>
-                                        </td>
+                        </div>
+                    </div>
 
 
-
-                                        <td>
-                                        <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
-                                             
-                                            <button class ='btn'>
-                                           <a href="<?=URLROOT;?>/admins/update/<?=$admin->id_user_admin?>">
-                                                Edit
-                                            </button>
-                                        </td>
-
-                                        <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
-                                        <td>
-                                                <form action="<?=URLROOT;?>/admins/delete/<?=$admin->id_user_admin?>" method="POST">
-                                                    <input type="submit" name="delete" value="Delete" class="btn">
-                                                </form>
-                                        </td>
-                                        <?php endforeach; ?>
-                                    </tr>
-                        </tbody>
-        </table>
-                
-        <div>
-
-<a href="<?=URLROOT;?>/admins/addAdmin"><input type="button" value="Crear un user_admin"></a>
-
-</div>
+    
+        </div>
     </div>
+</div>
 
+<div class="container-login">
+    <div class="wrapper-login">
+        <div class="box" style="margin: 5em; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">    
+            <div class="card" style=" width: 18rem; ">
+            
+                                <div class="card-body">
+                                    <h5 class="card-title">Admins</h5>
+                                    <p class="card-text">Gestiona los admins</p>
 
+                                    <button class ='btn'>
+                                    <a href="<?=URLROOT;?>/admins/menu">Entrar</a>
+                                    </button>
 
+                                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
