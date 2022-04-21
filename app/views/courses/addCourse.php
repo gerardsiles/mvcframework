@@ -1,10 +1,10 @@
 <?php
-    require APPROOT . '/views/includes/head.php';
+require APPROOT . '/views/includes/head.php';
 ?>
 <div class="navbar">
     <?php
-        require APPROOT . '/views/includes/navigation.php';
-    ?>
+require APPROOT . '/views/includes/navigation.php';
+?>
 </div>
 
 
@@ -48,7 +48,7 @@
         </form>
 
         <div>
-            <a href="<?=URLROOT;?>/teachers/index"><input type="button" value="Volver"></a>
+            <a href="<?=URLROOT;?>/courses/index"><input type="button" value="Volver"></a>
         </div>
     </div>
 
@@ -59,6 +59,6 @@
 
 <div class="footer">
         <?php
-            require APPROOT . '/views/includes/footer.php';
-        ?>
+require APPROOT . '/views/includes/footer.php';
+?>
     </div>

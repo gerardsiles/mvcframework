@@ -1,10 +1,13 @@
 <?php
-class Users extends Controller {
-    public function __construct() {
+class Users extends Controller
+{
+    public function __construct()
+    {
         $this->userModel = $this->model('User');
     }
 
-    public function register() {
+    public function register()
+    {
         $data = [
             'name' => '',
             'surname' => '',
@@ -21,16 +24,16 @@ class Users extends Controller {
             'phoneError' => '',
             'nifError' => '',
             'passwordError' => '',
-            'confirmPasswordError' => ''
+            'confirmPasswordError' => '',
         ];
 
         /* Funcion para el formulario de registro */
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Process form
-        // Sanitize POST data
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Process form
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-              $data = [
+            $data = [
                 'name' => trim($_POST['name']),
                 'surname' => trim($_POST['surname']),
                 'username' => trim($_POST['username']),
@@ -46,7 +49,7 @@ class Users extends Controller {
                 'phoneError' => '',
                 'nifError' => '',
                 'passwordError' => '',
-                'confirmPasswordError' => ''
+                'confirmPasswordError' => '',
             ];
 
             $nameValidation = "/^[a-zA-Z]*$/";
@@ -65,7 +68,7 @@ class Users extends Controller {
                 $data['usernameError'] = 'Introduzca un usuario';
             } elseif (!preg_match($nameValidation, $data['username'])) {
                 $data['usernameError'] = 'El usuario solo puede tener letras';
-            } else if($this->userModel->findUserByName($data['username'])) {
+            } else if ($this->userModel->findUserByName($data['username'])) {
                 $data['usernameError'] = 'Este nombre de usuario ya existe';
             }
 
@@ -76,7 +79,7 @@ class Users extends Controller {
             } else {
                 //Comprobar si el email existe
                 if ($this->userModel->findUserByEmail($data['email'])) {
-                $data['emailError'] = 'este email ya existe';
+                    $data['emailError'] = 'este email ya existe';
                 }
             }
 
@@ -88,26 +91,26 @@ class Users extends Controller {
                 $data['nifError'] = 'Introduzca su DNI o pasaporte';
             }
 
-            if(empty($data['password'])){
-              $data['passwordError'] = 'Introduzca una contrasena';
-            } elseif(strlen($data['password']) < 6){
-              $data['passwordError'] = 'La contrasena debe ser minimo de 8 caracteres';
+            if (empty($data['password'])) {
+                $data['passwordError'] = 'Introduzca una contrasena';
+            } elseif (strlen($data['password']) < 6) {
+                $data['passwordError'] = 'La contrasena debe ser minimo de 8 caracteres';
             } elseif (preg_match($passwordValidation, $data['password'])) {
-              $data['passwordError'] = 'La contrasena debe tener como minimo un valor numerico';
+                $data['passwordError'] = 'La contrasena debe tener como minimo un valor numerico';
             }
 
-             if (empty($data['confirmPassword'])) {
+            if (empty($data['confirmPassword'])) {
                 $data['confirmPasswordError'] = 'Introduzca la contrasena';
             } else {
                 if ($data['password'] != $data['confirmPassword']) {
-                $data['confirmPasswordError'] = 'Las contrasenas no son iguales';
+                    $data['confirmPasswordError'] = 'Las contrasenas no son iguales';
                 }
             }
 
             // antes de crear el usuario, comprobar que no hay errores
-            if (empty($data['nameError']) && empty($data['surnameError']) &&empty($data['usernameError'])
-            && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError'])
-            && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
+            if (empty($data['nameError']) && empty($data['surnameError']) && empty($data['usernameError'])
+                && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError'])
+                && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
 
                 // Hash contrasena
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -125,18 +128,19 @@ class Users extends Controller {
     }
 
     /* Funcion para inicio de sesion */
-    public function login() {
+    public function login()
+    {
         $data = [
             'username' => '',
             'password' => '',
-            'user_type'=> '',
+            'user_type' => '',
             'usernameError' => '',
             'passwordError' => '',
-            'userTypeError' => ''
+            'userTypeError' => '',
         ];
 
         // Comprobar que nos lleue la informacion como post
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //limpiar los datos de entrada
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -145,7 +149,7 @@ class Users extends Controller {
                 'password' => trim($_POST['password']),
                 'usernameError' => '',
                 'passwordError' => '',
-                'userTypeError' => ''
+                'userTypeError' => '',
             ];
 
             /* informar de errores en los datos introducidos */
@@ -175,30 +179,32 @@ class Users extends Controller {
             $data = [
                 'username' => '',
                 'password' => '',
-                'user_type'=> '',
+                'user_type' => '',
                 'usernameError' => '',
                 'passwordError' => '',
-                'userTypeError' => ''
+                'userTypeError' => '',
             ];
         }
         $this->view('users/login', $data);
     }
 
     /* Crear la sesion del usuario */
-    public function createUserSession($user,) {
+    public function createUserSession($user, )
+    {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
         $_SESSION['user_type'] = $user->user_type;
         /* Definir el tipo de usuario en un parametro de la sesion
         $_SESSION['user_type'] = 'admin';
-        */
+         */
         /* Redireccionar al index */
         header('location:' . URLROOT . '/pages/index');
     }
 
     /* cerrar la sesion del usuario */
-    public function logout() {
+    public function logout()
+    {
         unset($_SESSION['user_id']);
         unset($_SESSION['username']);
         unset($_SESSION['email']);
