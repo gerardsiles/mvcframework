@@ -1,10 +1,10 @@
 <?php
-    require APPROOT . '/views/includes/head.php';
+require APPROOT . '/views/includes/head.php';
 ?>
 <div class="navbar">
     <?php
-        require APPROOT . '/views/includes/navigation.php';
-    ?>
+require APPROOT . '/views/includes/navigation.php';
+?>
 </div>
 
 
@@ -25,34 +25,34 @@
                     </thead>
 
                         <tbody>
-                        <?php foreach($data['courses'] as $course): ?>
+                        <?php foreach ($data['courses'] as $course): ?>
                                     <tr>
 
-                                        <th><?= $course->id_course; ?></th>
+                                        <th><?=$course->id_course;?></th>
 
                                         <td >
-                                            <?= $course->name; ?>
+                                            <?=$course->name;?>
                                         </td>
 
                                         <td>
-                                            <?= $course->description; ?>
+                                            <?=$course->description;?>
                                         </td>
 
                                         <td>
-                                            <?= $course->date_start; ?>
+                                            <?=$course->date_start;?>
                                         </td>
 
                                         <td>
-                                            <?= $course->date_end; ?>
+                                            <?=$course->date_end;?>
                                         </td>
 
                                         <td>
-                                            <?= $course->active; ?>
+                                            <?=$course->active;?>
                                         </td>
 
                                         <td>
                                         <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
-                                             
+
                                             <button class ='btn'>
                                            <a href="<?=URLROOT;?>/courses/update/<?=$course->id_course?>">
                                                 Edit
@@ -65,11 +65,11 @@
                                                     <input type="submit" name="delete" value="Delete" class="btn">
                                                 </form>
                                         </td>
-                                        <?php endforeach; ?>
+                                        <?php endforeach;?>
                                     </tr>
                         </tbody>
         </table>
-                
+
         <div>
 
 <a href="<?=URLROOT;?>/courses/addCourse"><input type="button" value="Crear un curso"></a>
@@ -84,6 +84,6 @@
 
 <div class="footer">
     <?php
-        require APPROOT . '/views/includes/footer.php';
-    ?>
+require APPROOT . '/views/includes/footer.php';
+?>
 </div>

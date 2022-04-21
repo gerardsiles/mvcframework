@@ -1,10 +1,10 @@
 <?php
-    require APPROOT . '/views/includes/head.php';
+require APPROOT . '/views/includes/head.php';
 ?>
 <div class="navbar">
     <?php
-        require APPROOT . '/views/includes/navigation.php';
-    ?>
+require APPROOT . '/views/includes/navigation.php';
+?>
 </div>
 
 
@@ -12,40 +12,40 @@
     <div class="wrapper-login">
         <h2>Formulario: Editar un profesor</h2>
 
-        <form 
+        <form
         action="<?=URLROOT;?>/teachers/update/<?=$data['teacher']->id_teacher?>"
          method="POST">
-            <input type="text" placeholder="Nombre" 
-            name="name" 
-            value="<?php echo $data['teacher']->name?>">
+            <input type="text" placeholder="Nombre"
+            name="name"
+            value="<?php echo $data['teacher']->name ?>">
             <span class="invalidFeedback">
                 <?=$data['nameError'];?>
             </span>
 
-            <input type="text" placeholder="Apellido" 
-            name="surname" 
-            value="<?php echo $data['teacher']->surname?>">
+            <input type="text" placeholder="Apellido"
+            name="surname"
+            value="<?php echo $data['teacher']->surname ?>">
             <span class="invalidFeedback">
                 <?=$data['surnameError'];?>
             </span>
 
-            <input type="text" placeholder="Telefono" 
-            name="telephone" 
-            value="<?php echo $data['teacher']->telephone?>"> 
+            <input type="text" placeholder="Telefono"
+            name="telephone"
+            value="<?php echo $data['teacher']->telephone ?>">
             <span class="invalidFeedback">
                 <?=$data['telephoneError'];?>
             </span>
 
-            <input type="text" placeholder="NIF" 
-            name="nif" 
-            value="<?php echo $data['teacher']->nif?>">
+            <input type="text" placeholder="NIF"
+            name="nif"
+            value="<?php echo $data['teacher']->nif ?>">
             <span class="invalidFeedback">
                 <?=$data['nifError'];?>
             </span>
 
-            <input type="text" placeholder="Email" 
-            name="email" 
-            value="<?php echo $data['teacher']->email?>">
+            <input type="text" placeholder="Email"
+            name="email"
+            value="<?php echo $data['teacher']->email ?>">
             <span class="invalidFeedback">
                 <?=$data['emailError'];?>
             </span>
@@ -77,6 +77,6 @@
 
 <div class="footer">
         <?php
-            require APPROOT . '/views/includes/footer.php';
-        ?>
+require APPROOT . '/views/includes/footer.php';
+?>
     </div>

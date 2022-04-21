@@ -1,13 +1,16 @@
 <?php
-Class Schedule {
+class Schedule
+{
 
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Database;
     }
 
-    public function findAllCourses() {
+    public function findAllCourses()
+    {
         $this->db->query('SELECT * FROM courses WHERE active = 1 ORDER BY date_start');
 
         $results = $this->db->resultSet();
@@ -15,7 +18,8 @@ Class Schedule {
         return $results;
     }
 
-    public function addPost($data) {
+    public function addPost($data)
+    {
         $this->db->query('INSERT INTO posts (user_id, title, body) VALUES (:user_id, :title, :body)');
 
         $this->db->bind(':user_id', $data['user_id']);
@@ -29,7 +33,8 @@ Class Schedule {
         }
     }
 
-    public function findPostById($id) {
+    public function findPostById($id)
+    {
         $this->db->query('SELECT * FROM posts WHERE id = :id');
 
         $this->db->bind(':id', $id);
@@ -39,7 +44,8 @@ Class Schedule {
         return $row;
     }
 
-    public function updatePost($data) {
+    public function updatePost($data)
+    {
         $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
 
         $this->db->bind(':id', $data['id']);
@@ -53,7 +59,8 @@ Class Schedule {
         }
     }
 
-    public function deletePost($id) {
+    public function deletePost($id)
+    {
         $this->db->query('DELETE FROM posts WHERE id = :id');
 
         $this->db->bind(':id', $id);
@@ -65,8 +72,3 @@ Class Schedule {
         }
     }
 }
-
-
-
-
-
