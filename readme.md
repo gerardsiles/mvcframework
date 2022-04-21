@@ -14,7 +14,8 @@ las otras opciones contempladas, solo incrementaban la complejidad y los costes 
 estos son los cambios generados en la base de datos:
 
 ```sql
-
+ALTER TABLE students
+RENAME TO users;
 ```
 
 - FrontEnd: sitio web de contenido estático donde se presenta la aplicación y todas sus características junto con su funcionamiento.

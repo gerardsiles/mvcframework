@@ -143,7 +143,6 @@ class Users extends Controller {
             $data = [
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
-                'user_type' => trim($_POST['user_type']),
                 'usernameError' => '',
                 'passwordError' => '',
                 'userTypeError' => ''
