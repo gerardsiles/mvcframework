@@ -199,7 +199,7 @@ class Users extends Controller
         $_SESSION['user_type'] = 'admin';
          */
         /* Redireccionar al index */
-        header('location:' . URLROOT . '/pages/index');
+        header('location:' . URLROOT . '/index');
     }
 
     /* cerrar la sesion del usuario */

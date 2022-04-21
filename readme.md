@@ -8,8 +8,10 @@
   La propuesta de base de datos ofrecida, presenta varios problemas en la normalizacion de los datos y en la organizacion de la informacion. Tras contemplar varias opciones para solucionar
   este problema, hemos decidido quedarnos con la tabla students, renombrarla a users, y alli hemos agregado una columna que es user_type, con los valores de student, teacher y admin.
 
-Esta decision se ha tomado basandonos en la homogeneidad de los datos, y un control sobre las operaciones sobre la misma base de datos asegurando la integridad de la misma.
-las otras opciones contempladas, solo incrementaban la complejidad y los costes de la estructura, haciendo estas otras opciones las menos viables.
+Esta decision se ha tomado basandonos en la homogeneidad de los datos ( por ejemplo, en en la tabla de enrollment, de describe id_student, sin embargo en la tabla de student se
+describe su id como "id" a secas), y un control sobre las operaciones sobre la misma base de datos asegurando la integridad de la misma. las otras opciones contempladas, solo incrementaban la complejidad y los costes de la estructura, haciendo estas otras opciones las menos viables.
+
+Por estos motivos, la decision mas logica que aporta una correcta estructura de datos y homogeneidad es la decision que hemos tomado de quedarnos solametne con una tabla de usuarios.
 
 estos son los cambios generados en la base de datos:
 
@@ -19,24 +21,16 @@ RENAME TO users;
 ```
 
 - FrontEnd: sitio web de contenido estático donde se presenta la aplicación y todas sus características junto con su funcionamiento.
+  El front end se ha estructurado de manera estatica, con los headers y con la navegacion reutilizada en cada pagina dentro de la estructura MVC.
 
 - Registro-Login: sistemas de alta del usuario en el sistema y de acceso (una vez dado de alta) a la aplicación web. En los casos que no se pueda dar de alta o acceder, el sistema debe mostrar los mensajes de error correspondientes. Si no es un usuario administrador, seleccionar qué cursos o ciclos está inscrito.
 
-registro de usuario[x] // Gerard <br>
-login de usuario [x] // Gerard<br>
-redireccionar al usuario[]<br>
-menu usuario[]<br>
-login de profesor[] // Gerard<br>
-redireccionar al profesor[]<br>
-Menu profesor[]<br>
-login de admin[]<br>
-redireccionar al admin[]<br>
-menu usuario[]<br>
-logout[x] // gerard<br>
+Tanto el registro como el login funcionan correctamente, y continene regex para comprobar los inputs de los usuarios para que la informacion recibida sea correcta.
+Ademas saneamos el input para evitar inyecciones sql.
 
 - Panel administración: una vez se accede como administrador, tendrá acceso al Panel Administración donde podrá crear nuevas asignaturas y cursos y configurar nuevas asignaturas en el horario. En este apartado se podrá configurar el día y hora de las clases, el color, junto con el profesor que la imparte y el curso al que pertenece. Se dará la opción de poder añadir, modificar y eliminar profesores, clases y cursos.
 
-pagina administracion[] // Iago<br>
+pagina administracion[x] // Iago<br>
 mostrar datos mysql[] // Iago<br>
 agregar datos[] // Iago<br>
 modificar datos[] // Iago<br>
@@ -48,10 +42,10 @@ pagina horarios[]<br>
 diferentes vistas[]<br>
 
 - Perfil: sistema de configuración del usuario: modificación del nombre de usuario, correo electrónico y contraseña.
-  pagina de perfil[]<br>
-  modificacion del nombre[]<br>
-  modificacion correo electronico[]<br>
-  modificacion contrasena[]<br>
+  pagina de perfil[]<br> Gerard
+  modificacion del nombre[]<br> Gerard
+  modificacion correo electronico[]<br> Gerard
+  modificacion contrasena[]<br> Gerard
 
 ### Rubrica
 
@@ -64,9 +58,6 @@ diferentes vistas[]<br>
 ```sql
 ALTER TABLE `students` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'student' AFTER `email`;
 
-ALTER TABLE `teachers` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'teacher' AFTER `email`;
-
-ALTER TABLE `users_admin` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'admin' AFTER `email`;
 ```
 
 - FrontEnd
