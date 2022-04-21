@@ -9,13 +9,13 @@
             <!-- comprobar si la sesion es de admin para mostrar su enlace -->
             <?php if(isset($_SESSION['user_type'])) : ?>
                 <?php if($_SESSION['user_type'] == 'admin') : ?>
-            <a href="<?= URLROOT; ?>/admin/index">Administracion</a>
+            <a href="<?= URLROOT; ?>/admins/index">Administracion</a>
                 <?php endif; ?> 
             <?php endif; ?>
         </li>
         <li>
             <?php if(isset($_SESSION['user_type']) == 'student') : ?>
-            <a href="<?= URLROOT; ?>/shcedule/index">Horarios</a>
+            <a href="<?= URLROOT; ?>/shcedules/index">Horarios</a>
             <?php endif; ?>
         </li>
         <li>

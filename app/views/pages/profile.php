@@ -8,6 +8,7 @@
     ?>
 </div>
 
-<div>
+
+<div class="wrapper-landing">
     <h2>Perfil</h2>
 </div>

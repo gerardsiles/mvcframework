@@ -144,3 +144,36 @@ input::placeholder {
   color: #ff0000;
   display: block;
 }
+
+.footer {
+  position:fixed;
+  left:0em;
+  bottom:0em;
+  height:30px;
+  width:100%;
+  background-color:#00438D;
+  box-shadow: 0px 0px 10px #1a1a1a;
+}
+
+
+
+table.tabla{
+  display: inline-block;
+  aling-items: center;
+  justify-content: center;
+}
+
+
+table tr th{
+  border: 1px solid #D5D9D9;
+  width: 100px;
+  height: 25px;
+  color: white;
+  background-color: #00438D;
+}
+/* Para el estilo de las nuevas celdas */
+td {
+  border: 1px solid #D5D9D9;
+  width: 100px;
+  height: 25px;
+}

@@ -54,15 +54,15 @@ class Users extends Controller {
 
             //Validar inputs del usuario
             if (empty($data['name'])) {
-                $data['nameError'] = 'Entroduzca su nombre';
+                $data['nameError'] = 'Introduzca su nombre';
             }
 
             if (empty($data['surname'])) {
-                $data['surnameError'] = 'Entroduzca su apellido';
+                $data['surnameError'] = 'Introduzca su apellido';
             }
 
             if (empty($data['username'])) {
-                $data['usernameError'] = 'introduzca un usuario';
+                $data['usernameError'] = 'Introduzca un usuario';
             } elseif (!preg_match($nameValidation, $data['username'])) {
                 $data['usernameError'] = 'El usuario solo puede tener letras';
             } else if($this->userModel->findUserByName($data['username'])) {
@@ -81,19 +81,19 @@ class Users extends Controller {
             }
 
             if (empty($data['telephone'])) {
-                $data['phoneError'] = 'Entroduzca su telefono de contacto';
+                $data['phoneError'] = 'Introduzca su telefono de contacto';
             }
 
             if (empty($data['nif'])) {
-                $data['nifError'] = 'Entroduzca su DNI o pasaporte';
+                $data['nifError'] = 'Introduzca su DNI o pasaporte';
             }
 
             if(empty($data['password'])){
-              $data['passwordError'] = 'introduzca una contrasena';
+              $data['passwordError'] = 'Introduzca una contrasena';
             } elseif(strlen($data['password']) < 6){
-              $data['passwordError'] = 'la contrasena debe ser minimo de 8 caracteres';
+              $data['passwordError'] = 'La contrasena debe ser minimo de 8 caracteres';
             } elseif (preg_match($passwordValidation, $data['password'])) {
-              $data['passwordError'] = 'la contrasena debe tener como minimo un valor numerico';
+              $data['passwordError'] = 'La contrasena debe tener como minimo un valor numerico';
             }
 
              if (empty($data['confirmPassword'])) {
@@ -117,7 +117,7 @@ class Users extends Controller {
                     //Redirigir al login
                     header('location: ' . URLROOT . '/users/login');
                 } else {
-                    die('Salgo ha ido mal, vuelvelo a intentar mas tarde');
+                    die('Algo ha ido mal, vuelvelo a intentar mas tarde');
                 }
             }
         }

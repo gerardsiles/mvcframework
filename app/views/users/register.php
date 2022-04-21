@@ -54,9 +54,18 @@
                 <?=$data['confirmPasswordError'];?>
             </span>
 
-            <button id="submit" type="submit' value="submit">Registrarse</button>
+            <button id="submit" type="submit" value="submit">Registrarse</button>
             <p class="options">tienes una cuenta? <a href="<?=URLROOT?>/users/login">inicia sesion aqui</p>
         </form>
     </div>
 
+
+
 </div>
+
+<div class="footer">
+        <?php
+            require APPROOT . '/views/includes/footer.php';
+        ?>
+    </div>
+
