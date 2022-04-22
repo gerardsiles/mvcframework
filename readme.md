@@ -18,8 +18,6 @@ ALTER TABLE students
 RENAME TO users;
 ```
 
-Otros cambios que se han realizado son cambiar el atributo "id_teacher" de la tabla "class" por "id", para homogeneizar los datos según el cambio propuesto (tabla users). Esto mismo se hará en la tabla "enrollment" pasando "id_student" a "id". La tabla "teachers" se eliminará ya que su información se almacenará en la tabla "users".
-
 - FrontEnd: sitio web de contenido estático donde se presenta la aplicación y todas sus características junto con su funcionamiento.
 
 - Registro-Login: sistemas de alta del usuario en el sistema y de acceso (una vez dado de alta) a la aplicación web. En los casos que no se pueda dar de alta o acceder, el sistema debe mostrar los mensajes de error correspondientes. Si no es un usuario administrador, seleccionar qué cursos o ciclos está inscrito.
