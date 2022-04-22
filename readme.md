@@ -62,9 +62,11 @@ diferentes vistas[]<br>
   Hemos agregado un campo a las tablas de students, teachers y users_admins con el valor user_type. Esto lo usamos para guardar que tipo de usuario ha hecho el login, y luego mostrar un menu con diferentes funcionalidades dependiendo del tipo de usuario que haya iniciado sesion en la aplicacion.
 
 ```sql
-ALTER TABLE `users` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'student' AFTER `email`;
+ALTER TABLE `students` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'student' AFTER `email`;
 
+ALTER TABLE `teachers` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'teacher' AFTER `email`;
 
+ALTER TABLE `users_admin` ADD `user_type` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'admin' AFTER `email`;
 ```
 
 - FrontEnd
