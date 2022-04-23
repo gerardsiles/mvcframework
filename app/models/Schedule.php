@@ -9,48 +9,46 @@ class Schedule
         $this->db = new Database;
     }
 
-    public function findAllCourses()
+    public function findAllSchedules()
     {
-        $this->db->query('SELECT * FROM courses WHERE active = 1 ORDER BY date_start');
+        $this->db->query('SELECT * FROM schedule');
 
         $results = $this->db->resultSet();
 
         return $results;
     }
 
-    public function addPost($data)
+    public function findSchedulesByClass($id_class)
     {
-        $this->db->query('INSERT INTO posts (user_id, title, body) VALUES (:user_id, :title, :body)');
+        $this->db->query('SELECT * FROM schedule
+        WHERE id_class = :id_class');
 
-        $this->db->bind(':user_id', $data['user_id']);
-        $this->db->bind(':title', $data['title']);
-        $this->db->bind(':body', $data['body']);
+        $results = $this->db->resultSet();
 
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $results;
     }
 
-    public function findPostById($id)
+    public function findScheduleById($id_schedule)
     {
-        $this->db->query('SELECT * FROM posts WHERE id = :id');
+        $this->db->query('SELECT * FROM schedule
+        WHERE id_schedule = :id_schedule');
 
-        $this->db->bind(':id', $id);
+        $this->db->bind(':id_schedule', $id_schedule);
 
         $row = $this->db->single();
 
         return $row;
     }
 
-    public function updatePost($data)
+    public function addSchedule($data)
     {
-        $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
+        $this->db->query('INSERT INTO schedule (id_class, time_start, time_end, day)
+        VALUES (:id_class, :time_start, :time_end, :day)');
 
-        $this->db->bind(':id', $data['id']);
-        $this->db->bind(':title', $data['title']);
-        $this->db->bind(':body', $data['body']);
+        $this->db->bind(':id_class', $data['id_class']);
+        $this->db->bind(':time_start', $data['time_start']);
+        $this->db->bind(':time_end', $data['time_end']);
+        $this->db->bind(':day', $data['day']);
 
         if ($this->db->execute()) {
             return true;
@@ -59,11 +57,28 @@ class Schedule
         }
     }
 
-    public function deletePost($id)
+    public function update($data)
     {
-        $this->db->query('DELETE FROM posts WHERE id = :id');
+        $this->db->query('UPDATE schedule SET id_class = :id_class, time_start = :time_start,
+        time_end = :time_end, day = :day WHERE id_schedule = :id_schedule');
 
-        $this->db->bind(':id', $id);
+        $this->db->bind(':id_class', $data['classes']->id_class);
+        $this->db->bind(':time_start', $data['time_start']);
+        $this->db->bind(':time_end', $data['time_end']);
+        this->db->bind(':day', $data['day']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete($id_schedule)
+    {
+        $this->db->query('DELETE FROM schedule WHERE id_schedule = :id_schedule');
+
+        $this->db->bind(':id_schedule', $id_schedule);
 
         if ($this->db->execute()) {
             return true;

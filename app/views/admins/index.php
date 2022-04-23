@@ -35,6 +35,17 @@ require APPROOT . '/views/includes/navigation.php';
                         </div>
                     </div>
 
+                    <div class="card" style=" width: 18rem; ">
+                        <div class="card-body">
+                            <h5 class="card-title">Horarios</h5>
+                            <p class="card-text">Gestiona los horarios</p>
+
+                            <button class ='btn'>
+                            <a href="<?=URLROOT;?>/schedules/index">Entrar</a>
+                            </button>
+
+                        </div>
+                    </div>
 
 
         </div>
@@ -44,14 +55,25 @@ require APPROOT . '/views/includes/navigation.php';
 <div class="container-login">
     <div class="wrapper-login">
         <div class="box" style="margin: 5em; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">
+            
             <div class="card" style=" width: 18rem; ">
-
                                 <div class="card-body">
-                                    <h5 class="card-title">Admins</h5>
-                                    <p class="card-text">Gestiona los admins</p>
+                                    <h5 class="card-title">Clases</h5>
+                                    <p class="card-text">Gestiona las clases</p>
 
                                     <button class ='btn'>
-                                    <a href="<?=URLROOT;?>/admins/menu">Entrar</a>
+                                    <a href="<?=URLROOT;?>/classes/index">Entrar</a>
+                                    </button>
+
+                                </div>
+            </div>          
+            <div class="card" style=" width: 18rem; ">
+                                <div class="card-body">
+                                    <h5 class="card-title">Matriculaciones</h5>
+                                    <p class="card-text">Gestiona las matriculaciones</p>
+
+                                    <button class ='btn'>
+                                    <a href="<?=URLROOT;?>/enrollments/index">Entrar</a>
                                     </button>
 
                                 </div>

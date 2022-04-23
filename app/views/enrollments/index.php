@@ -13,11 +13,10 @@ require APPROOT . '/views/includes/navigation.php';
         <table>
                     <thead>
                         <tr>
-                            <th>Id_Schedule</th>
-                            <th>Id_Class</th>
-                            <th>Hora de inicio</th>
-                            <th>Hora de fin</th>
-                            <th>Dia</th>
+                            <th>Id_Enrollment</th>
+                            <th>Id_Student</th>
+                            <th>Id_Course</th>
+                            <th>Status</th>
 
                             <th>Editar</th>
                             <th>Eliminar</th>
@@ -26,39 +25,35 @@ require APPROOT . '/views/includes/navigation.php';
 
                         <tbody>
 
-                        <?php foreach ($data['schedules'] as $schedule): ?>
+                        <?php foreach ($data['enrollments'] as $enrollment): ?>
                                     <tr>
 
-                                        <th><?=$schedule->id_schedule;?></th>
+                                        <th><?=$enrollment->id_enrollment;?></th>
 
                                         <td >
-                                            <?=$schedule->id_class;?>
+                                            <?=$enrollment->id;?>
                                         </td>
 
                                         <td>
-                                            <?=$schedule->time_start;?>
+                                            <?=$enrollment->id_course;?>
                                         </td>
 
                                         <td>
-                                            <?=$schedule->time_end;?>
-                                        </td>
-
-                                        <td>
-                                            <?=$schedule->day;?>
+                                            <?=$enrollment->status;?>
                                         </td>
 
 
                                         <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
                                         <td>
                                             <button class ='btn'>
-                                           <a href="<?=URLROOT;?>/schedules/update/<?=$schedule->id_schedule?>">
+                                           <a href="<?=URLROOT;?>/enrollments/update/<?=$enrollment->id_enrollment?>">
                                                 Edit
                                             </button>
                                         </td>
 
                                         <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
                                         <td>
-                                                <form action="<?=URLROOT;?>/schedules/delete/<?=$schedule->id_schedule?>" method="POST">
+                                                <form action="<?=URLROOT;?>/enrollments/delete/<?=$enrollment->id_enrollment?>" method="POST">
                                                     <input type="submit" name="delete" value="Delete" class="btn">
                                                 </form>
                                         </td>

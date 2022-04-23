@@ -1,6 +1,5 @@
 <?php
-class Course
-{
+class Course{
 
     private $db;
 
@@ -22,7 +21,8 @@ class Course
     public function findCourseById($id_course)
     {
         // Preparar query para la base de datos
-        $this->db->query('SELECT * FROM courses WHERE id_course = :id_course');
+        $this->db->query('SELECT * FROM courses 
+        WHERE id_course = :id_course');
 
         // agregamos el parametro de id_course a la variable
         $this->db->bind(':id_course', $id_course);
@@ -69,7 +69,8 @@ class Course
 
     public function update($data)
     {
-        $this->db->query('UPDATE courses SET name = :name, description = :description, date_start = :date_start, date_end =:date_end, active = :active  WHERE id_course = :id_course');
+        $this->db->query('UPDATE courses SET name = :name, description = :description,
+         date_start = :date_start, date_end =:date_end, active = :active  WHERE id_course = :id_course');
 
         $this->db->bind(':id_course', $data['id_course']);
         $this->db->bind(':name', $data['name']);

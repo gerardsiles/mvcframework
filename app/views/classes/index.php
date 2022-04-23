@@ -13,12 +13,12 @@ require APPROOT . '/views/includes/navigation.php';
         <table>
                     <thead>
                         <tr>
-                            <th>Id_Schedule</th>
                             <th>Id_Class</th>
-                            <th>Hora de inicio</th>
-                            <th>Hora de fin</th>
-                            <th>Dia</th>
-
+                            <th>Id_Teacher</th>
+                            <th>Id_Course</th>
+                            <th>Id_Schedule</th>
+                            <th>Nombre</th>
+                            <th>Color</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -26,39 +26,43 @@ require APPROOT . '/views/includes/navigation.php';
 
                         <tbody>
 
-                        <?php foreach ($data['schedules'] as $schedule): ?>
+                        <?php foreach ($data['classes'] as $clase): ?>
                                     <tr>
 
-                                        <th><?=$schedule->id_schedule;?></th>
+                                        <th><?=$clase->id_class;?></th>
 
                                         <td >
-                                            <?=$schedule->id_class;?>
+                                            <?=$clase->id;?>
                                         </td>
 
                                         <td>
-                                            <?=$schedule->time_start;?>
+                                            <?=$clase->id_course;?>
                                         </td>
 
                                         <td>
-                                            <?=$schedule->time_end;?>
+                                            <?=$clase->id_schedule;?>
                                         </td>
 
                                         <td>
-                                            <?=$schedule->day;?>
+                                            <?=$clase->name;?>
+                                        </td>
+
+                                        <td>
+                                            <?=$clase->color;?>
                                         </td>
 
 
                                         <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
                                         <td>
                                             <button class ='btn'>
-                                           <a href="<?=URLROOT;?>/schedules/update/<?=$schedule->id_schedule?>">
+                                           <a href="<?=URLROOT;?>/classes/update/<?=$clase->id_class?>">
                                                 Edit
                                             </button>
                                         </td>
 
                                         <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
                                         <td>
-                                                <form action="<?=URLROOT;?>/schedules/delete/<?=$schedule->id_schedule?>" method="POST">
+                                                <form action="<?=URLROOT;?>/classes/delete/<?=$clase->id_class?>" method="POST">
                                                     <input type="submit" name="delete" value="Delete" class="btn">
                                                 </form>
                                         </td>
@@ -69,7 +73,7 @@ require APPROOT . '/views/includes/navigation.php';
 
         <div>
 
-<a href="<?=URLROOT;?>/enrollments/addEnrollment"><input type="button" value="Crear una matriculacion"></a>
+<a href="<?=URLROOT;?>/classes/addClass"><input type="button" value="Crear una clase"></a>
 
 </div>
     </div>

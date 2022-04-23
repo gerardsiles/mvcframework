@@ -39,11 +39,13 @@
       /* Comprobar la contrasena hashed si hace match */
       $hashedPassword = $row->pass;
 
+
       if (password_verify($password, $hashedPassword)) {
           return $row;
       } else {
           return false;
       }
+
 
     }
 
@@ -64,9 +66,10 @@
       }
     }
 
-    /* Encontrar a un usuario en la base de datos con su nombre de usuario */
-    public function findUserByName($name) {
-      $this->db->query('SELECT * FROM users WHERE username = :name');
+
+     /* Encontrar a un usuario en la base de datos con su nombre de usuario */
+     public function findUserByName($name) {
+      $this->db->query('SELECT * FROM users WHERE name = :name');
 
       $this->db->bind(':name', $name);
 
@@ -76,6 +79,36 @@
           return false;
       }
     }
+
+
+     /* Encontrar a un usuario en la base de datos con su nombre de usuario */
+      public function findUserById($id) {
+       $this->db->query('SELECT * FROM users WHERE id = :id');
+        
+       $this->db->bind(':id', $id);
+        
+        $row = $this->db->single();
+
+        return $row;
+                }
+
+
+
+     /* public function comprobarTipoUsuario($id){
+       $this->db->query('SELECT * FROM users WHERE id = :id AND user_type = "student"');
+            
+       $this->db->bind(':id', $id);
+            
+       echo ($id);
+       var_dump($this->db->query('SELECT * FROM users WHERE id = 1 AND user_type = "student"'));
+
+       if($this->db->rowCount() > 0){ // comprobar si los resultados recibidos tienen algun match
+          return true;
+         } else {
+           return false;
+         }
+            
+            
 
     /* Cambiar el nombre de usuario */
     public function changeUsername($data) {
