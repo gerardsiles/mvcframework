@@ -123,9 +123,10 @@ class Enrollments extends Controller
                 $data['idError'] = 'Introduzca el id del estudiante';
             } else if (!$this->userModel->findUserById($data['id'])) {
                 $data['idError'] = 'Este usuario no existe';
-            } elseif ($this->userModel->comprobarTipoUsuario($data['id']) == 'student') {
+            } /*elseif ($this->userModel->comprobarTipoUsuario($data['id'])) {
                 $data['idError'] = 'El usuario que ha seleccionado no es un estudiante';
             }
+            var_dump($this->userModel->comprobarTipoUsuario($data['id']));*/
 
             if (empty($data['id_course'])) {
                 $data['id_courseError'] = 'Introduzca el id del curso';

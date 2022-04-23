@@ -13,7 +13,7 @@ require APPROOT . '/views/includes/navigation.php';
         <h2>Formulario: Editar un profesor</h2>
 
         <form
-        action="<?=URLROOT;?>/teachers/update/<?=$data['teacher']->id_teacher?>"
+        action="<?=URLROOT;?>/teachers/update/<?=$data['teacher']->id?>"
          method="POST">
             <input type="text" placeholder="Nombre"
             name="name"
@@ -29,11 +29,25 @@ require APPROOT . '/views/includes/navigation.php';
                 <?=$data['surnameError'];?>
             </span>
 
+            <input type="text" placeholder="Username"
+            name="username"
+            value="<?php echo $data['teacher']->username ?>">
+            <span class="invalidFeedback">
+                <?=$data['usernameError'];?>
+            </span>
+            
+            <input type="text" placeholder="Email"
+            name="email"
+            value="<?php echo $data['teacher']->email ?>">
+            <span class="invalidFeedback">
+                <?=$data['emailError'];?>
+            </span>
+
             <input type="text" placeholder="Telefono"
             name="telephone"
             value="<?php echo $data['teacher']->telephone ?>">
             <span class="invalidFeedback">
-                <?=$data['telephoneError'];?>
+                <?=$data['phoneError'];?>
             </span>
 
             <input type="text" placeholder="NIF"
@@ -43,12 +57,20 @@ require APPROOT . '/views/includes/navigation.php';
                 <?=$data['nifError'];?>
             </span>
 
-            <input type="text" placeholder="Email"
-            name="email"
-            value="<?php echo $data['teacher']->email ?>">
+            <input type="text" placeholder="Password"
+            name="pass"
+            value="<?php echo $data['teacher']->pass ?>">
             <span class="invalidFeedback">
-                <?=$data['emailError'];?>
+                <?=$data['passError'];?>
             </span>
+
+            <input type="text" placeholder="Confirmar password"
+            name="confirmPass"
+            value="">
+            <span class="invalidFeedback">
+                <?=$data['confirmPassError'];?>
+            </span>
+
 
             <br>
 
