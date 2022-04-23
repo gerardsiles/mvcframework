@@ -195,9 +195,6 @@ class Users extends Controller
     $_SESSION['username'] = $user->username;
     $_SESSION['email'] = $user->email;
     $_SESSION['user_type'] = $user->user_type;
-    /* Definir el tipo de usuario en un parametro de la sesion
-    $_SESSION['user_type'] = 'admin';
-      */
     /* Redireccionar al index */
     header('location:' . URLROOT . '/index');
   }
@@ -213,36 +210,94 @@ class Users extends Controller
   }
 
   public function index()
-  {
+  {    if(!isLoggedIn()) {
+    $this->view('users/login');
+  }
     $this->view('users/index');
   }
 
+  /* Actualizar la constrasena del usuario */
   public function password()
   {
+    if(!isLoggedIn()) {
+      $this->view('users/login');
+    }
+    $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
     $data = [
       'username' => '',
-      'password' => '',
-      'usernamedError' => '',
+      'newPassword' => '',
+      'passwordError' => '',
     ];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      
+      $data = [
+        'username' => $_SESSION['username'],
+        'newPassword' => trim($_POST['newPassword']),
+        'passwordError' => '',
+      ];   
+      if (empty($data['newPassword'])) {
+        $data['passwordError'] = 'Introduzca una contrasena';
+      } elseif (strlen($data['newPassword']) < 6) {
+          $data['passwordError'] = 'La contrasena debe ser minimo de 8 caracteres';
+      } elseif (preg_match($passwordValidation, $data['newPassword'])) {
+          $data['passwordError'] = 'La contrasena debe tener como minimo un valor numerico';
+      }
 
-   
+      if(empty($data['passwordError'])) {
+        if($this->userModel->changePassword($data)){
+          $this->view('users/index');
+        } else {
+          die('Algo ha salido mal, vuelvelo a intentar');
+        }
+      } else{
+          $this->view('users/password', $data);
+      }    
+    } 
     $this->view('users/password', $data);
-
   }
 
+  /* Actualizar el email del usuario */
   public function email()
   {
     $data = [
       'username' => $_SESSION['username'],
-      'email' => '',
+      'newEmail' => '',
       'emailError' => '',
+      'emailSuccess' => '',
     ];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      
+      $data = [
+        'username' => $_SESSION['username'],
+        'newEmail' => trim($_POST['newEmail']),
+        'emailError' => '',
+        'emailSuccess' => '',
+      ];
+      /* Comprobar que el nuevo email no exista  */
+      if($this->userModel->findUserByEmail($data['newEmail'])){
+        $data['emailError'] = 'Este email ya existe';
+      }    
 
+      if(empty($data['newEmail'])) {
+        $data['emailError'] = 'Introduzca un nuevo email';
+      } 
+      if(empty($data['emailError'])) {
+        if($this->userModel->changeEmail($data)){
+          $_SESSION['email'] = $data['newEmail'];
+          $data['emailSuccess'] = 'Email cambiado con exito.';
+        } else {
+          die('Algo ha salido mal, vuelvelo a intentar');
+        }
+      } else{
+          $this->view('users/email', $data);
+      }    
+    } 
       $this->view('users/email', $data);
   }
 
-  public function username()
-  {
+  public function username(){
     $data = [
       'username' => '',
       'newUsername' => '',
@@ -250,21 +305,31 @@ class Users extends Controller
     ];
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      
+      $data = [
+        'username' => $_SESSION['username'],
+        'newUsername' => trim($_POST['newUsername']),
+        'usernameError' => '',
+      ];
       /* Comprobar que el nuevo nombre de usuario no exista  */
-      if(!$this->userModel->findUserByName(trim($_POST['newUsername']))){
-        $data = [
-          'username' => $_SESSION['username'],
-          'newUsername' => trim($_POST['newUsername']),
-          'usernameError' => '',
-        ];
-        $this->userModel->changeUserName($data);
-        $this->view('users/index');
-      } else {
-        /* informar que ese nombre ya existe */
-        $data['usernameError'] = 'Ese nombre ya existe, intenta con uno diferente';
-      }
-    }
-      $this->view('users/username', $data);
-  }
+      if($this->userModel->findUserByName($data['newUsername'])){
+        $data['usernameError'] = 'Este nombre de usuario ya existe';
+      }    
 
+      if(empty($data['newUsername'])) {
+        $data['usernameError'] = 'Introduzca un nuevo nombre de usuario';
+      } 
+      if(empty($data['usernameError'])) {
+        if($this->userModel->changeUserName($data)){
+          $_SESSION['username'] = $data['newUsername'];
+          $this->view('users/index', $data);
+        } else {
+          die('Algo ha salido mal, vuelvelo a intentar');
+        }
+      } else{
+          $this->view('users/username', $data);
+      }    
+    } 
+    $this->view('users/username', $data);
+  }
 }

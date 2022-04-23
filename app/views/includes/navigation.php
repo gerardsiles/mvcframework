@@ -1,6 +1,4 @@
 <nav class="top-nav">
-<?=$_SESSION['user_type'] . " " . $_SESSION['username'];?>
-
     <ul>
         <li>
             <a href="<?php echo URLROOT; ?>/index">Home</a>

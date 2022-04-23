@@ -13,7 +13,7 @@ require APPROOT . '/views/includes/navigation.php';
   <form action="<?=URLROOT;?>/users/username" method="POST">
     <div class="input-box"> 
       <label for="username">Modifica el nombre de usuario</label>
-      <input type="text" id="newUsername" name="newUsername" required>
+      <input type="text" id="newUsername" name="newUsername" autocomplete="off">
         <span class="invalidFeedback">
           <?=$data['usernameError'];?>
         </span>

@@ -77,19 +77,47 @@
       }
     }
 
-    public function changeUsername($data) {  
-      var_dump($data);
-      $this->db->query('UPDATE users SET username = :newName WHERE users.username = :name');
+    /* Cambiar el nombre de usuario */
+    public function changeUsername($data) {
+
+      $this->db->query('UPDATE users SET username = :newName WHERE username = :name');
       $this->db->bind(':newName', $data['newUsername']);
       $this->db->bind(':name', $data['username']);
+
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
-    public function changeEmail() {
-        // TODO
+    /* Cambiar el email del usuario */
+    public function changeEmail($data) {
+      $this->db->query('UPDATE users SET email = :newEmail WHERE username = :name');
+      $this->db->bind(':newEmail', $data['newEmail']);
+      $this->db->bind(':name', $data['username']);
+
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
-    public function changePassword() {
-        // TODO
+    /* Cambiar la contrasena del usuario */
+    public function changePassword($data) {
+      /* hashear la password de entrada */
+      $data['newPassword'] = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+
+      $this->db->query('UPDATE users SET pass = :newPassword WHERE username = :user');
+      $this->db->bind(':newPassword', $data['newPassword']);
+      $this->db->bind(':user', $data['username']);
+
+      if ($this->db->execute()) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
 

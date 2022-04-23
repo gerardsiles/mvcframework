@@ -11,7 +11,7 @@
 
 <div class="container-profile">
   <div class="wrapper-profile">
-  <h2>Perfil</h2>
+  <h2>Perfil - usuario:<?=$_SESSION['username'] . ", email:" . $_SESSION['email'];?></h2>
 
     <div class="card" style=" width: 18rem; ">
       <div class="card-body">

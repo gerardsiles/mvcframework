@@ -173,6 +173,11 @@ input::placeholder {
 	display: block;
 }
 
+.validFeedback {
+	color: #7fff00;
+	display: block;
+}
+
 .footer {
 	position: fixed;
 	left: 0em;

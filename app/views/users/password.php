@@ -13,9 +13,9 @@ require APPROOT . '/views/includes/navigation.php';
   <form action="<?=URLROOT;?>/users/password" method="POST">
     <div class="input-box">
       <label for="username">Modifica la contrasena</label>
-      <input type="text" id="newPassword" name="newPassword" placeholder="nueva contrasena" required>
+      <input type="text" id="newPassword" name="newPassword" placeholder="nueva contrasena" autocomplete="off">
         <span class="invalidFeedback">
-          <?=$data['usernameError'];?>
+          <?=$data['passwordError'];?>
         </span>
       <div class="input-box">
         <button type="submit" class="btn-profile">Actualizar</button>
