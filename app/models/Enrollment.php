@@ -30,35 +30,6 @@ class Enrollment
         return $row;
     }
 
-    public function findEnrollmentsByIdStudent($id)
-    {
-        $this->db->query('SELECT * FROM enrollment
-        WHERE id = :id');
-
-        $results = $this->db->resultSet();
-
-        return $results;
-    }
-
-    public function findEnrollmentsByCourse($id_course)
-    {
-        $this->db->query('SELECT * FROM enrollment
-        WHERE $id_course = :id_course');
-
-        $results = $this->db->resultSet();
-
-        return $results;
-    }
-
-    public function findCourseByEnrollment($id_enrollment)
-    {
-        $this->db->query('SELECT id_course FROM enrollment
-        WHERE $id_enrollment = :id_enrollment');
-
-        $results = $this->db->resultSet();
-
-        return $results;
-    }
 
     public function addEnrollment($data)
     {

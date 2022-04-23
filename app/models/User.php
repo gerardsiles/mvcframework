@@ -88,27 +88,22 @@
                     return $row;
                 }
 
-        public function findAllStudents($user_type) {
-            $this->db->query('SELECT * FROM users WHERE user_type = :user_type');
 
-            $this->db->bind(':user_type', $user_type);
+
+       /* public function comprobarTipoUsuario($id){
+            $this->db->query('SELECT * FROM users WHERE id = :id AND user_type = "student"');
+            
+            $this->db->bind(':id', $id);
+            
+            echo ($id);
+            var_dump($this->db->query('SELECT * FROM users WHERE id = 1 AND user_type = "student"'));
 
             if($this->db->rowCount() > 0){ // comprobar si los resultados recibidos tienen algun match
                 return true;
             } else {
                 return false;
             }
-        }
-
-        public function comprobarTipoUsuario($id){
-            $this->db->query('SELECT user_type FROM users WHERE id = :id');
-
-            $this->db->bind(':id', $id);
-            
-            $row = $this->db->single();
-
-            return $row;
-        }
+        }*/
 
 
 

@@ -45,7 +45,7 @@ class Schedule
         $this->db->query('INSERT INTO schedule (id_class, time_start, time_end, day)
         VALUES (:id_class, :time_start, :time_end, :day)');
 
-        $this->db->bind(':id_class', $data['classes']->id_class);
+        $this->db->bind(':id_class', $data['id_class']);
         $this->db->bind(':time_start', $data['time_start']);
         $this->db->bind(':time_end', $data['time_end']);
         $this->db->bind(':day', $data['day']);
