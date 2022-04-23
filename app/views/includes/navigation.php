@@ -1,6 +1,4 @@
 <nav class="top-nav">
-<?=$_SESSION['user_type'] . " " . $_SESSION['username'];?>
-
     <ul>
         <li>
             <a href="<?php echo URLROOT; ?>/index">Home</a>
@@ -22,7 +20,7 @@
         </li>
         <li>
             <?php if(isset($_SESSION['user_id'])) : ?>
-                <a href="<?= URLROOT; ?>/users/profile">Perfil</a>
+                <a href="<?= URLROOT; ?>/users/index">Perfil</a>
             <?php endif; ?>
         </li>
         <li class="btn-login">
