@@ -9,9 +9,14 @@
 </div>
 
 
+<div class="cabecera"> <h1>Perfil - usuario:</h1> 
+<div> <?=$_SESSION['username'] . ", email: " . $_SESSION['email'];?></div>
+</div>
+
 <div class="container-profile">
-  <div class="wrapper-profile">
-  <h2>Perfil - usuario:<?=$_SESSION['username'] . ", email:" . $_SESSION['email'];?></h2>
+  
+  <div class="wrapper-profile" style="margin: auto; display: grid; grid-template-columns: auto auto auto; align-items: start; justify-content: safe center;">
+  
 
     <div class="card" style=" width: 18rem; ">
       <div class="card-body">

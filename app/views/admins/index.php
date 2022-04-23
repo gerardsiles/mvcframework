@@ -9,9 +9,9 @@ require APPROOT . '/views/includes/navigation.php';
 
 <div class="container-login">
     <div class="wrapper-login">
-        <div class="box" style="margin: 5em; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">
+        <div class="box" style="margin: auto; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">
 
-                    <div class="card" style=" width: 18rem; ">
+                    <div class="card" >
                         <div class="card-body">
                             <h5 class="card-title">Cursos</h5>
                             <p class="card-text">Gestiona los cursos</p>
@@ -23,7 +23,7 @@ require APPROOT . '/views/includes/navigation.php';
                         </div>
                     </div>
 
-                    <div class="card" style=" width: 18rem; ">
+                    <div class="card" >
                         <div class="card-body">
                             <h5 class="card-title">Profesores</h5>
                             <p class="card-text">Gestiona los profesores</p>
@@ -35,7 +35,7 @@ require APPROOT . '/views/includes/navigation.php';
                         </div>
                     </div>
 
-                    <div class="card" style=" width: 18rem; ">
+                    <div class="card" >
                         <div class="card-body">
                             <h5 class="card-title">Horarios</h5>
                             <p class="card-text">Gestiona los horarios</p>
@@ -54,9 +54,9 @@ require APPROOT . '/views/includes/navigation.php';
 
 <div class="container-login">
     <div class="wrapper-login">
-        <div class="box" style="margin: 5em; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: space-between;">
+        <div class="box" style="margin: auto; display: grid; grid-template-columns: auto auto auto auto auto auto auto; align-items: start; justify-content: safe center;">
             
-            <div class="card" style=" width: 18rem; ">
+            <div class="card" >
                                 <div class="card-body">
                                     <h5 class="card-title">Clases</h5>
                                     <p class="card-text">Gestiona las clases</p>
@@ -67,7 +67,7 @@ require APPROOT . '/views/includes/navigation.php';
 
                                 </div>
             </div>          
-            <div class="card" style=" width: 18rem; ">
+            <div class="card" >
                                 <div class="card-body">
                                     <h5 class="card-title">Matriculaciones</h5>
                                     <p class="card-text">Gestiona las matriculaciones</p>
