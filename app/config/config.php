@@ -2,7 +2,7 @@
     //Parametros de la base de datos
     define('DB_HOST','localhost');
     define('DB_USER','root');
-    define('DB_PASS','');
+    define('DB_PASS','IagoMySQL!2022');
     define('DB_NAME','producto 2');
 
     //APPROOT

@@ -7,7 +7,7 @@ class Classes extends Controller
         $this->claseModel = $this->model('Clase');
         $this->userModel = $this->model('User');
         $this->courseModel = $this->model('Course');
-        $this->scheduleModel = $this->model('Course');
+        $this->scheduleModel = $this->model('Schedule');
     }
 
     public function index()
@@ -63,9 +63,9 @@ class Classes extends Controller
                 $data['idError'] = 'Introduzca el id del profesor';
             } else if (!$this->userModel->findUserById($data['id'])) {
                 $data['idError'] = 'Este usuario no existe';
-            } elseif ($this->userModel->comprobarTipoUsuario($data['id']) == 'teacher') {
+            } /*elseif (!$this->userModel->comprobarTipoUsuario($data['id'])) {
                 $data['idError'] = 'El usuario que ha seleccionado no es un profesor';
-            }
+            }*/
 
             if (empty($data['id_course'])) {
                 $data['id_courseError'] = 'Introduzca el id del curso';
@@ -148,9 +148,9 @@ class Classes extends Controller
                 $data['idError'] = 'Introduzca el nombre del profesor';
             } else if (!$this->userModel->findUserById($data['id'])) {
                 $data['idError'] = 'Este usuario no existe';
-            } elseif ($this->userModel->comprobarTipoUsuario($data['id']) == 'teacher') {
+            } /*elseif ($this->userModel->comprobarTipoUsuario($data['id']) == 'teacher') {
                 $data['idError'] = 'El usuario que ha seleccionado no es un profesor';
-            }
+            }*/
 
             if (empty($data['id_course'])) {
                 $data['id_courseError'] = 'Introduzca el id del curso';
@@ -193,7 +193,7 @@ class Classes extends Controller
 
     public function delete($id_class)
     {
-        $clase = $this->claseModel->findClaseById($id_class);
+        $clase = $this->claseModel->findClassById($id_class);
 
         $data = [
             'clase' => $clase,

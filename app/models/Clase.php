@@ -81,7 +81,7 @@ class Clase
     public function update($data)
     {
         $this->db->query('UPDATE class SET id = :id, id_course = :id_course,
-        id_schedule = :id_schedule, name = :name
+        id_schedule = :id_schedule, name = :name, color = :color
         WHERE id_class = :id_class');
 
         $this->db->bind(':id_class', $data['id_class']);

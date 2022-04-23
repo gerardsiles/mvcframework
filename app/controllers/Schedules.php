@@ -55,7 +55,7 @@ class Schedules extends Controller
             //Validar inputs del usuario
             if (empty($data['id_class'])) {
                 $data['id_classError'] = 'Introduzca el id de la clase';
-            } else if (!$this->claseModel->findClaseById($data['id'])) {
+            } else if (!$this->claseModel->findClassById($data['id_class'])) {
                 $data['id_classError'] = 'Esta clase no existe';
             }
 
@@ -127,7 +127,7 @@ class Schedules extends Controller
             //Validar inputs del usuario
             if (empty($data['id_class'])) {
                 $data['id_classError'] = 'Introduzca el id de la clase';
-            } else if (!$this->claseModel->findClaseById($data['id'])) {
+            } else if (!$this->claseModel->findClassById($data['id_class'])) {
                 $data['id_classError'] = 'Esta clase no existe';
             }
 
@@ -163,7 +163,7 @@ class Schedules extends Controller
 
     public function delete($id_schedule)
     {
-        $schedule = $this->scheduleModel->findClaseById($id_schedule);
+        $schedule = $this->scheduleModel->findScheduleById($id_schedule);
 
         $data = [
             'schedule' => $schedule,

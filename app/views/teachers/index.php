@@ -14,12 +14,15 @@ require APPROOT . '/views/includes/navigation.php';
                     <thead>
                         <tr>
                             <th>Id_Teacher</th>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>Telephone</th>
-                            <th>NIF</th>
+                            <th>Username</th>
+                            <th>Pass</th>
                             <th>Email</th>
                             <th>User_type</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Telefono</th>
+                            <th>Nif</th>
+                            
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -29,22 +32,14 @@ require APPROOT . '/views/includes/navigation.php';
                         <?php foreach ($data['teachers'] as $teacher): ?>
                                     <tr>
 
-                                        <th><?=$teacher->id_teacher;?></th>
+                                        <th><?=$teacher->id;?></th>
 
                                         <td >
-                                            <?=$teacher->name;?>
+                                            <?=$teacher->username;?>
                                         </td>
 
                                         <td>
-                                            <?=$teacher->surname;?>
-                                        </td>
-
-                                        <td>
-                                            <?=$teacher->telephone;?>
-                                        </td>
-
-                                        <td>
-                                            <?=$teacher->nif;?>
+                                            <?=$teacher->pass;?>
                                         </td>
 
                                         <td>
@@ -56,17 +51,33 @@ require APPROOT . '/views/includes/navigation.php';
                                         </td>
 
                                         <td>
+                                            <?=$teacher->name;?>
+                                        </td>
+
+                                        <td>
+                                            <?=$teacher->surname;?>
+                                        </td>
+
+                                        <td>
+                                            <?=$teacher->nif;?>
+                                        </td>
+
+                                        <td>
+                                            <?=$teacher->surname;?>
+                                        </td>
+
+                                        <td>
                                         <!--PENDIENTE CUANDO TENGA EL EDIT PREPARADO-->
 
                                             <button class ='btn'>
-                                           <a href="<?=URLROOT;?>/teachers/update/<?=$teacher->id_teacher?>">
+                                           <a href="<?=URLROOT;?>/teachers/update/<?=$teacher->id?>">
                                                 Edit
                                             </button>
                                         </td>
 
                                         <!--PENDIENTE CUANDO TENGA EL DELETE PREPARADO-->
                                         <td>
-                                                <form action="<?=URLROOT;?>/teachers/delete/<?=$teacher->id_teacher?>" method="POST">
+                                                <form action="<?=URLROOT;?>/teachers/delete/<?=$teacher->id?>" method="POST">
                                                     <input type="submit" name="delete" value="Delete" class="btn">
                                                 </form>
                                         </td>
