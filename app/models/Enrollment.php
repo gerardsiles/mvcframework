@@ -55,7 +55,7 @@ class Enrollment
         $this->db->bind(':id_enrollment', $data['id_enrollment']);
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':id_course', $data['id_course']);
-        $this->db->bind(':id_course', $data['status']);
+        $this->db->bind(':status', $data['status']);
 
         if ($this->db->execute()) {
             return true;

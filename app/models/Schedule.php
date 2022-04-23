@@ -62,10 +62,11 @@ class Schedule
         $this->db->query('UPDATE schedule SET id_class = :id_class, time_start = :time_start,
         time_end = :time_end, day = :day WHERE id_schedule = :id_schedule');
 
-        $this->db->bind(':id_class', $data['classes']->id_class);
+        $this->db->bind(':id_schedule', $data['id_schedule']);
+        $this->db->bind(':id_class', $data['id_class']);
         $this->db->bind(':time_start', $data['time_start']);
         $this->db->bind(':time_end', $data['time_end']);
-        this->db->bind(':day', $data['day']);
+        $this->db->bind(':day', $data['day']);
 
         if ($this->db->execute()) {
             return true;

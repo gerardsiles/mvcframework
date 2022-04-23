@@ -5,11 +5,12 @@ class Teachers extends Controller
     {
         // Llamar al modelo para recibir los datos en el controlador
         $this->teacherModel = $this->model('Teacher');
+        $this->userModel = $this->model('User');
     }
 
     public function index()
     {
-        $teachers = $this->teacherModel->getTeachers();
+        $teachers = $this->userModel->findAllTeachers();
         $data = [
             'teachers' => $teachers,
         ];
@@ -23,16 +24,21 @@ class Teachers extends Controller
         $data = [
             'name' => '',
             'surname' => '',
-            'telephone' => '',
-            'nif' => '',
+            'username' => '',
             'email' => '',
             'user_type' => '',
+            'telephone' => '',
+            'nif' => '',
+            'pass' => '',
+            'confirmPass' => '',
             'nameError' => '',
             'surnameError' => '',
-            'telephoneError' => '',
-            'nifError' => '',
+            'usernameError' => '',
             'emailError' => '',
-            'user_typeError' => '',
+            'phoneError' => '',
+            'nifError' => '',
+            'passError' => '',
+            'confirmPassError' => '',
         ];
 
         /* Funcion para el formulario de registro */
@@ -43,83 +49,122 @@ class Teachers extends Controller
             $data = [
                 'name' => trim($_POST['name']),
                 'surname' => trim($_POST['surname']),
-                'telephone' => trim($_POST['telephone']),
-                'nif' => trim($_POST['nif']),
+                'username' => trim($_POST['username']),
                 'email' => trim($_POST['email']),
                 'user_type' => trim($_POST['user_type']),
+                'telephone' => trim($_POST['telephone']),
+                'nif' => trim($_POST['nif']),
+                'pass' => trim($_POST['pass']),
+                'confirmPass' => trim($_POST['confirmPass']),
                 'nameError' => '',
                 'surnameError' => '',
-                'telephoneError' => '',
-                'nifError' => '',
+                'usernameError' => '',
                 'emailError' => '',
-                'user_typeError' => '',
+                'phoneError' => '',
+                'nifError' => '',
+                'passError' => '',
+                'confirmPassError' => '',
             ];
             $nameValidation = "/^[a-zA-Z]*$/";
-            $telephoneValidation = "/^[0-9]*$/";
+            $passValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
 
             //Validar inputs del usuario
-            if (empty($data['name'])) {
-                $data['nameError'] = 'Introduzca el nombre del profesor';
-            } else if (!preg_match($nameValidation, $data['name'])) {
-                $data['nameError'] = 'Introduzca solo letras';
-            }
+          if (empty($data['name'])) {
+            $data['nameError'] = 'Introduzca su nombre';
+        }
 
-            if (empty($data['surname'])) {
-                $data['surnameError'] = 'Introduzca el apellido del profesor';
-            }
+        if (empty($data['surname'])) {
+            $data['surnameError'] = 'Introduzca su apellido';
+        }
 
-            if (empty($data['telephone'])) {
-                $data['telephoneError'] = 'Introduzca la fecha de inicio de curso';
-            } elseif (!preg_match($telephoneValidation, $data['telephone'])) {
-                $data['telephoneError'] = 'Introduzca solo numeros';
-            }
+        if (empty($data['username'])) {
+            $data['usernameError'] = 'Introduzca un usuario';
+        } elseif (!preg_match($nameValidation, $data['username'])) {
+            $data['usernameError'] = 'El usuario solo puede tener letras';
+        } else if ($this->userModel->findUserByName($data['username'])) {
+            $data['usernameError'] = 'Este nombre de usuario ya existe';
+        }
 
-            if (empty($data['nif'])) {
-                $data['nifError'] = 'Introduzca el nif del profesor';
-            }
-
-            if (empty($data['email'])) {
-                $data['emailError'] = 'Introduzca el email del profesor';
-            } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $data['emailError'] = 'Introduce el formato correcto';
-            }
-
-            // antes de crear el usuario, comprobar que no hay errores
-            if (empty($data['nameError']) && empty($data['surnameError']) && empty($data['telephoneError'])
-                && empty($data['nifError']) && empty($data['emailError'])) {
-
-                //registrar al usuario con el modelo
-                if ($this->teacherModel->addTeacher($data)) {
-                    //Redirigir al index de cursos
-                    header('location: ' . URLROOT . '/teachers/index');
-                } else {
-                    die('Algo ha ido mal, vuelvelo a intentar mas tarde');
-                }
-            } else {
-                $this->view('teachers/addTeacher', $data);
+        if (empty($data['email'])) {
+            $data['emailError'] = 'introduzca su email';
+        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['emailError'] = 'introduce el formato correcto';
+        } else {
+            //Comprobar si el email existe
+            if ($this->userModel->findUserByEmail($data['email'])) {
+                $data['emailError'] = 'este email ya existe';
             }
         }
-        $this->view('teachers/addTeacher', $data);
 
-    }
+        if (empty($data['telephone'])) {
+            $data['phoneError'] = 'Introduzca su telefono de contacto';
+        }
 
-    public function update($id_teacher)
+        if (empty($data['nif'])) {
+            $data['nifError'] = 'Introduzca su DNI o pasaporte';
+        }
+
+        if (empty($data['pass'])) {
+            $data['passError'] = 'Introduzca una contrasena';
+        } elseif (strlen($data['pass']) < 6) {
+            $data['passError'] = 'La contrasena debe ser minimo de 8 caracteres';
+        } elseif (preg_match($passValidation, $data['pass'])) {
+            $data['passError'] = 'La contrasena debe tener como minimo un valor numerico';
+        }
+
+        if (empty($data['confirmPass'])) {
+            $data['confirmPassError'] = 'Introduzca la contrasena';
+        } else {
+            if ($data['pass'] != $data['confirmPass']) {
+                $data['confirmPassError'] = 'Las contrasenas no son iguales';
+            }
+        }
+
+            // antes de crear el usuario, comprobar que no hay errores
+            if (empty($data['nameError']) && empty($data['surnameError']) && empty($data['usernameError'])
+              && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError'])
+              && empty($data['passError']) && empty($data['confirmPassError'])) {
+
+                // Hash contrasena
+              $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
+
+              //registrar al usuario con el modelo
+              if ($this->teacherModel->addTeacher($data)) {
+                  //Redirigir al login
+                  header('location: ' . URLROOT . '/teachers/index');
+              } else {
+                  die('Algo ha ido mal, vuelvelo a intentar mas tarde');
+              } 
+          }else {
+            $this->view('teachers/addTeacher', $data);
+          }
+      }
+      $this->view('teachers/addTeacher', $data);
+  }
+
+    public function update($id)
     {
-        $teacher = $this->teacherModel->findTeacherById($id_teacher);
+        $teacher = $this->userModel->findUserById($id);
 
         $data = [
             'teacher' => $teacher,
             'name' => '',
             'surname' => '',
-            'telephone' => '',
-            'nif' => '',
+            'username' => '',
             'email' => '',
             'user_type' => '',
+            'telephone' => '',
+            'nif' => '',
+            'pass' => '',
+            'confirmPass' => '',
             'nameError' => '',
             'surnameError' => '',
-            'telephoneError' => '',
-            'nifError' => '',
+            'usernameError' => '',
             'emailError' => '',
+            'phoneError' => '',
+            'nifError' => '',
+            'passError' => '',
+            'confirmPassError' => '',
 
         ];
 
@@ -128,89 +173,127 @@ class Teachers extends Controller
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'id_teacher' => $id_teacher,
+                'id' => $id,
                 'name' => trim($_POST['name']),
                 'surname' => trim($_POST['surname']),
-                'telephone' => trim($_POST['telephone']),
-                'nif' => trim($_POST['nif']),
+                'username' => trim($_POST['username']),
                 'email' => trim($_POST['email']),
                 'user_type' => trim($_POST['user_type']),
+                'telephone' => trim($_POST['telephone']),
+                'nif' => trim($_POST['nif']),
+                'pass' => trim($_POST['pass']),
+                'confirmPass' => trim($_POST['confirmPass']),
                 'nameError' => '',
                 'surnameError' => '',
-                'telephoneError' => '',
-                'nifError' => '',
+                'usernameError' => '',
                 'emailError' => '',
+                'phoneError' => '',
+                'nifError' => '',
+                'passError' => '',
+                'confirmPassError' => '',
 
             ];
 
             $nameValidation = "/^[a-zA-Z]*$/";
-            $telephoneValidation = "/^[0-9]*$/";
+            $passValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
 
             //Validar inputs del usuario
-            if (empty($data['name'])) {
-                $data['nameError'] = 'Introduzca el nombre del profesor';
-            } elseif (!preg_match($nameValidation, $data['name'])) {
-                $data['nameError'] = 'Introduzca solo letras';
-            }
+          if (empty($data['name'])) {
+            $data['nameError'] = 'Introduzca su nombre';
+        }
 
-            if (empty($data['surname'])) {
-                $data['surnameError'] = 'Introduzca el apellido del profesor';
-            }
+        if (empty($data['surname'])) {
+            $data['surnameError'] = 'Introduzca su apellido';
+        }
 
-            if (empty($data['telephone'])) {
-                $data['telephoneError'] = 'Introduzca la fecha de inicio de curso';
-            } elseif (!preg_match($telephoneValidation, $data['telephone'])) {
-                $data['telephoneError'] = 'Introduzca solo numeros';
-            }
+        if (empty($data['username'])) {
+            $data['usernameError'] = 'Introduzca un usuario';
+        } elseif (!preg_match($nameValidation, $data['username'])) {
+            $data['usernameError'] = 'El usuario solo puede tener letras';
+        } else if ($this->userModel->findUserByName($data['username'])) {
+            $data['usernameError'] = 'Este nombre de usuario ya existe';
+        }
 
-            if (empty($data['nif'])) {
-                $data['nifError'] = 'Introduzca el nif del profesor';
-            }
-
-            if (empty($data['email'])) {
-                $data['emailError'] = 'Introduzca el email del profesor';
-            } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $data['emailError'] = 'Introduce el formato correcto';
-            }
-
-            // antes de crear el usuario, comprobar que no hay errores
-            if (empty($data['nameError']) && empty($data['surnameError']) && empty($data['telephoneError'])
-                && empty($data['nifError']) && empty($data['emailError'])) {
-
-                //registrar el curso en el modelo
-                if ($this->teacherModel->update($data)) {
-                    //Redirigir al index de cursos
-                    header('location: ' . URLROOT . '/teachers/index');
-                } else {
-                    die('Algo ha ido mal, vuelvelo a intentar mas tarde');
-                }
-            } else {
-                $this->view('teachers/update', $data);
+        if (empty($data['email'])) {
+            $data['emailError'] = 'introduzca su email';
+        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['emailError'] = 'introduce el formato correcto';
+        } else {
+            //Comprobar si el email existe
+            if ($this->userModel->findUserByEmail($data['email'])) {
+                $data['emailError'] = 'este email ya existe';
             }
         }
 
-        $this->view('teachers/update', $data);
+        if (empty($data['telephone'])) {
+            $data['phoneError'] = 'Introduzca su telefono de contacto';
+        }
 
-    }
+        if (empty($data['nif'])) {
+            $data['nifError'] = 'Introduzca su DNI o pasaporte';
+        }
 
-    public function delete($id_teacher)
+        if (empty($data['pass'])) {
+            $data['passError'] = 'Introduzca una contrasena';
+        } elseif (strlen($data['pass']) < 6) {
+            $data['passError'] = 'La contrasena debe ser minimo de 8 caracteres';
+        } elseif (preg_match($passValidation, $data['pass'])) {
+            $data['passError'] = 'La contrasena debe tener como minimo un valor numerico';
+        }
+
+        if (empty($data['confirmPass'])) {
+            $data['confirmPassError'] = 'Introduzca la contrasena';
+        } else {
+            if ($data['pass'] != $data['confirmPass']) {
+                $data['confirmPassError'] = 'Las contrasenas no son iguales';
+            }
+        }
+
+            // antes de crear el usuario, comprobar que no hay errores
+            if (empty($data['nameError']) && empty($data['surnameError']) && empty($data['usernameError'])
+              && empty($data['emailError']) && empty($data['phoneError']) && empty($data['nifError'])
+              && empty($data['passError']) && empty($data['confirmPassError'])) {
+
+                // Hash contrasena
+              $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
+
+              //registrar al usuario con el modelo
+              if ($this->teacherModel->update($data)) {
+                  //Redirigir al login
+                  header('location: ' . URLROOT . '/teachers/index');
+              } else {
+                  die('Algo ha ido mal, vuelvelo a intentar mas tarde');
+              } 
+          }else {
+            $this->view('teachers/update', $data);
+          }
+      }
+      $this->view('teachers/update', $data);
+  }
+
+    public function delete($id)
     {
-        $teacher = $this->teacherModel->findTeacherById($id_teacher);
+        $teacher = $this->userModel->findUserById($id);
 
         $data = [
             'teacher' => $teacher,
             'name' => '',
             'surname' => '',
-            'telephone' => '',
-            'nif' => '',
+            'username' => '',
             'email' => '',
             'user_type' => '',
+            'telephone' => '',
+            'nif' => '',
+            'pass' => '',
+            'confirmPass' => '',
             'nameError' => '',
             'surnameError' => '',
-            'telephoneError' => '',
-            'nifError' => '',
+            'usernameError' => '',
             'emailError' => '',
-            'user_typeError' => '',
+            'phoneError' => '',
+            'nifError' => '',
+            'passError' => '',
+            'confirmPassError' => '',
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -218,13 +301,15 @@ class Teachers extends Controller
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            if ($this->teacherModel->delete($id_teacher)) {
+            if ($this->teacherModel->delete($id)) {
                 header('location: ' . URLROOT . '/teachers/index');
 
             } else {
                 die('Algo ha ido mal, vuelvelo a intentar mas tarde');
             }
         }
+   
+
     }
 
 }

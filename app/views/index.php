@@ -7,7 +7,7 @@
     ?>
 </div>
 
-<div id="footer">
+<div class="footer">
     <?php
         require APPROOT . '/views/includes/footer.php';
     ?>
