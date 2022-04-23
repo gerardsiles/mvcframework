@@ -227,6 +227,7 @@ class Users extends Controller
       'username' => '',
       'newPassword' => '',
       'passwordError' => '',
+      'passwordSuccess' => '',
     ];
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -235,6 +236,7 @@ class Users extends Controller
         'username' => $_SESSION['username'],
         'newPassword' => trim($_POST['newPassword']),
         'passwordError' => '',
+        'passwordSuccess' => '',
       ];   
       if (empty($data['newPassword'])) {
         $data['passwordError'] = 'Introduzca una contrasena';
@@ -246,7 +248,7 @@ class Users extends Controller
 
       if(empty($data['passwordError'])) {
         if($this->userModel->changePassword($data)){
-          $this->view('users/index');
+          $data['passwordSuccess'] = 'Constrasena cambiada con exito.';
         } else {
           die('Algo ha salido mal, vuelvelo a intentar');
         }
@@ -286,6 +288,7 @@ class Users extends Controller
       if(empty($data['emailError'])) {
         if($this->userModel->changeEmail($data)){
           $_SESSION['email'] = $data['newEmail'];
+
           $data['emailSuccess'] = 'Email cambiado con exito.';
         } else {
           die('Algo ha salido mal, vuelvelo a intentar');
@@ -297,11 +300,13 @@ class Users extends Controller
       $this->view('users/email', $data);
   }
 
+  /* Actualizar nombre de usuario */
   public function username(){
     $data = [
       'username' => '',
       'newUsername' => '',
       'usernameError' => '',
+      'usernameSuccess' => '',
     ];
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -310,6 +315,8 @@ class Users extends Controller
         'username' => $_SESSION['username'],
         'newUsername' => trim($_POST['newUsername']),
         'usernameError' => '',
+        'usernameSuccess' => '',
+
       ];
       /* Comprobar que el nuevo nombre de usuario no exista  */
       if($this->userModel->findUserByName($data['newUsername'])){
@@ -319,10 +326,14 @@ class Users extends Controller
       if(empty($data['newUsername'])) {
         $data['usernameError'] = 'Introduzca un nuevo nombre de usuario';
       } 
+
+      if($data['username'] == $data['newUsername']) {
+        $data['usernameError'] = 'El nombre debe ser diferente al actual';
+      }
       if(empty($data['usernameError'])) {
         if($this->userModel->changeUserName($data)){
           $_SESSION['username'] = $data['newUsername'];
-          $this->view('users/index', $data);
+          $data['usernameSuccess'] = 'Nombre de usuario cambiado con exito';
         } else {
           die('Algo ha salido mal, vuelvelo a intentar');
         }

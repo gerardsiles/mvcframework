@@ -17,6 +17,9 @@ require APPROOT . '/views/includes/navigation.php';
         <span class="invalidFeedback">
           <?=$data['passwordError'];?>
         </span>
+        <span class="validFeedback">
+          <?=$data['passwordSuccess'];?>
+        </span>
       <div class="input-box">
         <button type="submit" class="btn-profile">Actualizar</button>
       </div>

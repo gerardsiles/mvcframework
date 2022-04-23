@@ -17,6 +17,9 @@ require APPROOT . '/views/includes/navigation.php';
         <span class="invalidFeedback">
           <?=$data['usernameError'];?>
         </span>
+        <span class="validFeedback">
+          <?=$data['usernameSuccess'];?>
+        </span>
       <div class="input-box">
         <button type="submit" class="btn-profile">Actualizar nombre</button>
       </div>
