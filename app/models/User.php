@@ -51,7 +51,7 @@
         public function findUserByEmail($email) {
             // Preparar query para la base de datos
             // solamente los estudiantes pueden hacer el registro, admins y profesores son introducidos manualmente
-            $this->db->query('SELECT * FROM students WHERE email = :email');
+            $this->db->query('SELECT * FROM users WHERE email = :email');
 
             // agregamos el parametro de email a la variable
             $this->db->bind(':email', $email);
@@ -66,7 +66,7 @@
 
         /* Encontrar a un usuario en la base de datos con su nombre de usuario */
         public function findUserByName($name) {
-            $this->db->query('SELECT * FROM students WHERE username = :name');
+            $this->db->query('SELECT * FROM users WHERE name = :name');
 
             $this->db->bind(':name', $name);
 
@@ -76,6 +76,42 @@
                 return false;
             }
         }
+
+                /* Encontrar a un usuario en la base de datos con su nombre de usuario */
+                public function findUserById($id) {
+                    $this->db->query('SELECT * FROM users WHERE id = :id');
+        
+                    $this->db->bind(':id', $id);
+        
+                    $row = $this->db->single();
+
+                    return $row;
+                }
+
+        public function findAllStudents($user_type) {
+            $this->db->query('SELECT * FROM users WHERE user_type = :user_type');
+
+            $this->db->bind(':user_type', $user_type);
+
+            if($this->db->rowCount() > 0){ // comprobar si los resultados recibidos tienen algun match
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function comprobarTipoEstudiante($id){
+            $this->db->query('SELECT user_type FROM users WHERE id = :id');
+
+            $this->db->bind(':id', $id);
+            
+            $row = $this->db->single();
+
+            return $row;
+        }
+
+
+
 
         public function changeUsername($newName) {
 

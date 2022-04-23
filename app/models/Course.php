@@ -1,6 +1,5 @@
 <?php
-class Course
-{
+class Course{
 
     private $db;
 

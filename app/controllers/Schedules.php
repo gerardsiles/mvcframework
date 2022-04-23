@@ -10,9 +10,11 @@ class Schedules extends Controller
     // crear vista
     public function index()
     {
-        $schedules = $this->scheduleModel->findAllCourses();
+        $schedules = $this->scheduleModel->findAllSchedules();
+        $classes = $this->classModel->findAllClasses();
         $data = [
             'schedules' => $schedules,
+            'classes' => $classes,
         ];
 
         $this->view('schedules/index', $data);
