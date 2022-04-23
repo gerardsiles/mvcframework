@@ -100,7 +100,7 @@
             }
         }
 
-        public function comprobarTipoEstudiante($id){
+        public function comprobarTipoUsuario($id){
             $this->db->query('SELECT user_type FROM users WHERE id = :id');
 
             $this->db->bind(':id', $id);

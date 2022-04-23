@@ -1,5 +1,6 @@
 <?php
-class Enrollment{
+class Enrollment
+{
 
     private $db;
 
@@ -19,7 +20,7 @@ class Enrollment{
 
     public function findEnrollmentById($id_enrollment)
     {
-        $this->db->query('SELECT * FROM enrollment 
+        $this->db->query('SELECT * FROM enrollment
         WHERE id_enrollment = :id_enrollment');
 
         $this->db->bind(':id_enrollment', $id_enrollment);
@@ -31,7 +32,7 @@ class Enrollment{
 
     public function findEnrollmentsByIdStudent($id)
     {
-        $this->db->query('SELECT * FROM enrollment 
+        $this->db->query('SELECT * FROM enrollment
         WHERE id = :id');
 
         $results = $this->db->resultSet();
@@ -39,11 +40,9 @@ class Enrollment{
         return $results;
     }
 
-
-
     public function findEnrollmentsByCourse($id_course)
     {
-        $this->db->query('SELECT * FROM enrollment 
+        $this->db->query('SELECT * FROM enrollment
         WHERE $id_course = :id_course');
 
         $results = $this->db->resultSet();
@@ -53,7 +52,7 @@ class Enrollment{
 
     public function findCourseByEnrollment($id_enrollment)
     {
-        $this->db->query('SELECT id_course FROM enrollment 
+        $this->db->query('SELECT id_course FROM enrollment
         WHERE $id_enrollment = :id_enrollment');
 
         $results = $this->db->resultSet();
@@ -61,16 +60,14 @@ class Enrollment{
         return $results;
     }
 
-
     public function addEnrollment($data)
     {
-        $this->db->query('INSERT INTO enrollment (id, id_course, status) 
+        $this->db->query('INSERT INTO enrollment (id, id_course, status)
         VALUES (:id, :id_course, :status)');
 
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':id_course', $data['id_course']);
         $this->db->bind(':status', $data['status']);
-
 
         if ($this->db->execute()) {
             return true;
@@ -79,15 +76,14 @@ class Enrollment{
         }
     }
 
-
-
-    public function updateEnrollment($data)
+    public function update($data)
     {
         $this->db->query('UPDATE enrollment SET id = :id, id_course = :id_course, status = :status
         WHERE id_enrollment = :id_enrollment');
 
-        $this->db->bind(':id', $data['teachers']->id);
-        $this->db->bind(':id_course', $data['courses']->id_course);
+        $this->db->bind(':id_enrollment', $data['id_enrollment']);
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':id_course', $data['id_course']);
         $this->db->bind(':id_course', $data['status']);
 
         if ($this->db->execute()) {
@@ -97,7 +93,7 @@ class Enrollment{
         }
     }
 
-    public function deleteEnrollment($id_enrollment)
+    public function delete($id_enrollment)
     {
         $this->db->query('DELETE FROM enrollment WHERE id_enrollment = :id_enrollment');
 

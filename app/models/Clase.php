@@ -1,5 +1,6 @@
 <?php
-class Clase{
+class Clase
+{
 
     private $db;
 
@@ -10,7 +11,7 @@ class Clase{
 
     public function findAllClasses()
     {
-        $this->db->query('SELECT * FROM classes');
+        $this->db->query('SELECT * FROM class');
 
         $results = $this->db->resultSet();
 
@@ -19,7 +20,7 @@ class Clase{
 
     public function findClassById($id_class)
     {
-        $this->db->query('SELECT * FROM classes 
+        $this->db->query('SELECT * FROM class
         WHERE id_class = :id_class');
 
         $this->db->bind(':id_class', $id_class);
@@ -31,7 +32,7 @@ class Clase{
 
     public function findClassesByTeacher($id)
     {
-        $this->db->query('SELECT * FROM classes 
+        $this->db->query('SELECT * FROM class
         WHERE $id = :id');
 
         $results = $this->db->resultSet();
@@ -41,7 +42,7 @@ class Clase{
 
     public function findClassesByCourse($id_course)
     {
-        $this->db->query('SELECT * FROM classes 
+        $this->db->query('SELECT * FROM class
         WHERE $id_course = :id_course');
 
         $results = $this->db->resultSet();
@@ -51,7 +52,7 @@ class Clase{
 
     public function findClassesBySchedule($id_schedule)
     {
-        $this->db->query('SELECT * FROM classes 
+        $this->db->query('SELECT * FROM class
         WHERE id_schedule = :id_schedule');
 
         $results = $this->db->resultSet();
@@ -59,15 +60,14 @@ class Clase{
         return $results;
     }
 
-
     public function addClass($data)
     {
-        $this->db->query('INSERT INTO classes (id, id_course, id_schedule, name, color) 
+        $this->db->query('INSERT INTO class (id, id_course, id_schedule, name, color)
         VALUES (:id, :id_course, :id_schedule, :name, :color)');
 
-        $this->db->bind(':id', $data['teachers']->id);
-        $this->db->bind(':id_course', $data['courses']->id_course);
-        $this->db->bind(':id_schedule', $data['schedules']->id_schedule);
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':id_course', $data['id_course']);
+        $this->db->bind(':id_schedule', $data['id_schedule']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':color', $data['color']);
 
@@ -78,19 +78,18 @@ class Clase{
         }
     }
 
-
-
-    public function updateClasses($data)
+    public function update($data)
     {
-        $this->db->query('UPDATE classes SET id = :id, id_course = :id_course, 
-        id_schedule = :id_schedule, name = :name  
+        $this->db->query('UPDATE class SET id = :id, id_course = :id_course,
+        id_schedule = :id_schedule, name = :name
         WHERE id_class = :id_class');
 
-    $this->db->bind(':id', $data['teachers']->id);
-    $this->db->bind(':id_course', $data['courses']->id_course);
-    $this->db->bind(':id_schedule', $data['schedules']->id_schedule);
-    $this->db->bind(':name', $data['name']);
-    $this->db->bind(':color', $data['color']);
+        $this->db->bind(':id_class', $data['id_class']);
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':id_course', $data['id_course']);
+        $this->db->bind(':id_schedule', $data['id_schedule']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':color', $data['color']);
 
         if ($this->db->execute()) {
             return true;
@@ -99,9 +98,9 @@ class Clase{
         }
     }
 
-    public function deleteClass($id_class)
+    public function delete($id_class)
     {
-        $this->db->query('DELETE FROM classes WHERE id_class = :id_class');
+        $this->db->query('DELETE FROM class WHERE id_class = :id_class');
 
         $this->db->bind(':id_class', $id_class);
 
