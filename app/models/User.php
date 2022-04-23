@@ -90,12 +90,12 @@
         $row = $this->db->single();
 
         return $row;
-      }        
+     }
 
-
-
+     //LO HACIAMOS PARA HACER VALIDACION PARA EVITAR PODER METER UN PROFESOR EN UN ENROLLMENT PERO
+     //NO NOS SALÍA
      /* public function comprobarTipoUsuario($id){
-       $this->db->query('SELECT * FROM users WHERE id = :id AND user_type = "student"');
+       $this->db->query("SELECT * FROM users WHERE id = :id AND user_type = /'student'/");
             
        $this->db->bind(':id', $id);
             
@@ -107,8 +107,16 @@
          } else {
            return false;
          }
+        }*/
             
-            
+         public function findAllTeachers()
+         {
+             $this->db->query('SELECT * FROM users WHERE user_type = "teacher"');
+     
+             $results = $this->db->resultSet();
+     
+             return $results;
+         }        
 
     /* Cambiar el nombre de usuario */
     public function changeUsername($data) {
@@ -151,7 +159,5 @@
       } else {
         return false;
       }
-    }
-
-
   }
+}

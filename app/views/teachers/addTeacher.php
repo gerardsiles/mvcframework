@@ -12,7 +12,7 @@ require APPROOT . '/views/includes/navigation.php';
     <div class="wrapper-login">
         <h2>Formulario: Crear un nuevo profesor</h2>
         <form action="<?=URLROOT;?>/teachers/addTeacher" method="POST">
-            <input type="text" placeholder="Nombre" name="name">
+        <input type="text" placeholder="Nombre" name="name">
             <span class="invalidFeedback">
                 <?=$data['nameError'];?>
             </span>
@@ -22,9 +22,28 @@ require APPROOT . '/views/includes/navigation.php';
                 <?=$data['surnameError'];?>
             </span>
 
-            <input type="text" placeholder="Telefono" name="telephone">
+            <input type="text" placeholder="Nombre de usuario" name="username">
             <span class="invalidFeedback">
-                <?=$data['telephoneError'];?>
+                <?=$data['usernameError'];?>
+            </span>
+
+            <input type="email" placeholder="email" name="email">
+            <span class="invalidFeedback">
+                <?=$data['emailError'];?>
+            </span>
+
+            <br>
+
+           <label for="text">Selecciona el tipo de usuario.</label>
+                 <select id="user_type" name="user_type">
+                 <option value='teacher'>Profesor</option>
+                 </select>
+
+            <br>
+
+            <input type="number" placeholder="Telefono" name="telephone">
+            <span class="invalidFeedback">
+                <?=$data['phoneError'];?>
             </span>
 
             <input type="text" placeholder="NIF" name="nif">
@@ -32,31 +51,28 @@ require APPROOT . '/views/includes/navigation.php';
                 <?=$data['nifError'];?>
             </span>
 
-
-            <input type="text" placeholder="Email" name="email">
+            <input type="pass" placeholder="Contrasena" name="pass">
             <span class="invalidFeedback">
-                <?=$data['emailError'];?>
+                <?=$data['passError'];?>
             </span>
 
-            <br>
-
-           <label for="text">Tipo de usuario</label>
-                 <select id="user_type" name="user_type">
-                 <option value="teacher">Profesor</option>
-                 </select>
-
-            <br>
-
+            <input type="pass" placeholder="Confirmar contrasena" name="confirmPass">
+            <span class="invalidFeedback">
+                <!-- si el usuario introduce un nombre de usuario incorrecto
+            informamos que el formato es erroneo -->
+                <?=$data['confirmPassError'];?>
+            </span>
 
             <button id="submit" type="submit" value="submit">Crear profesor</button>
-
-
         </form>
 
         <div>
             <a href="<?=URLROOT;?>/teachers/index"><input type="button" value="Volver"></a>
         </div>
+
     </div>
+
+
 
 </div>
 
