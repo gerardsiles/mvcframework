@@ -11,11 +11,17 @@ require APPROOT . '/views/includes/navigation.php';
 <div class="container-schedule">
   <div class="wrapper-schedule">
     <div>
-       <h3>Horarios de clases</h3>
-        <button type="submit" name="dia" value="POST" method="POST">Horarios de hoy</button>
-        <button type="submit" name="semana" value="POST" method="POST">Horarios de la semana</button>
-        <button type="submit" name="mes" value="POST" method="POST">Horarios del mes</button>
-       <!-- echo informacion recibida -->
+      <h3>Horarios de clases</h3>
+      <form action="schedule" method="POST">
+        <button type="submit" name="actualizar" value="dia" method="POST">Horarios de hoy</button>
+        <button type="submit" name="actualizar" value="semana" method="POST">Horarios de la semana</button>
+        <button type="submit" name="actualizar" value="mes" method="POST">Horarios del mes</button>
+      </form>
+      <span class="feedback">
+          <!-- informar de la vista segun dia, semana y hora-->
+          <?=$data['vista'];?>
+      </span>
+        <!-- echo informacion recibida -->
        <table>
           <thead>
             <tr>

@@ -349,22 +349,48 @@ class Users extends Controller
     $horarios = $this->userModel->findScheduleDay($userID);
     $data = [
       'horarios' => $horarios,
+      'vista' => '',
     ];
     // Cargar horarios de hoy
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      if($_POST['dia']) {
+    switch($_REQUEST['actualizar']){
+      case 'dia': 
         $data['horarios'] =  $this->userModel->findScheduleDay($userID);
-      }
-      if($_POST['semana']) {
+        $data['vista'] = 'Horarios del dia';
+        $this->view('users/schedule', $data);
+        break;
+      case 'semana':
         $data['horarios'] =  $this->userModel->findScheduleWeek($userID);
-        echo('semana');
-      }
-      if($_POST['mes']) {
+        $data['vista'] = 'Horarios de la semana';
+        $this->view('users/schedule', $data);
+        break;
+      case 'mes':
         $data['horarios'] =  $this->userModel->findScheduleMonth($userID);
-        echo('mes');
-
-      }
+        $data['vista'] = 'Horarios del mes';
+        $this->view('users/schedule', $data);
+        break;
+      default:
+        $this->view('users/schedule', $data);
+        break;
+        
     }
+    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //   if($_REQUEST['dia']) {
+    //     $data['horarios'] =  $this->userModel->findScheduleDay($userID);
+    // $this->view('users/schedule', $data);
+
+    //   }
+    //   if($_REQUEST['semana']) {
+    //     $data['horarios'] =  $this->userModel->findScheduleWeek($userID);
+    //     $this->view('users/schedule', $data);
+
+    //   }
+    //   if($_REQUEST['mes']) {
+    //     $data['horarios'] =  $this->userModel->findScheduleMonth($userID);
+    //     $this->view('users/schedule', $data);
+
+
+
+    // }
     $this->view('users/schedule', $data);
   }
 }
