@@ -17,44 +17,42 @@ require APPROOT . '/views/includes/navigation.php';
         <button type="submit" name="mes" value="POST" method="POST">Horarios del mes</button>
        <!-- echo informacion recibida -->
        <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre del curso</th>
-                            <th>Nombre de la clase</th>
-                            <th>Color de la clase</th>
-                            <th>Hora de inicio</th>
-                            <th>Hora de fin</th>
+          <thead>
+            <tr>
+            <th>Nombre del curso</th>
+            <th>Nombre de la clase</th>
+            <th>Color de la clase</th>
+            <th>Hora de inicio</th>
+            <th>Hora de fin</th>
+            </tr>
+          </thead>
 
+          <tbody>
 
-                        </tr>
-                    </thead>
+            <?php foreach ($data['horarios'] as $horario): ?>
+              <tr>
 
-                        <tbody>
+              <th><?=$horario->nombreCurso?></th>
 
-                        <?php foreach ($data['horarios'] as $horario): ?>
-                                    <tr>
+              <td >
+              <?=$horario->nombreClase?>
+              </td>
 
-                                        <th><?=$horario->nombreCurso?></th>
+              <td>
+              <?=$horario->colorClase?>
+              </td>
 
-                                        <td >
-                                        <?=$horario->nombreClase?>
-                                        </td>
+              <td>
+              <?=$horario->horaInicio?>
+              </td>
 
-                                        <td>
-                                        <?=$horario->colorClase?>
-                                        </td>
+              <td>
+              <?=$horario->horaFin?>
+              </td>
 
-                                        <td>
-                                        <?=$horario->horaInicio?>
-                                        </td>
-
-                                        <td>
-                                        <?=$horario->horaFin?>
-                                        </td>
-
-                                        <?php endforeach;?>
-                                    </tr>
-                        </tbody>
+              <?php endforeach;?>
+              </tr>
+          </tbody>
         </table>
 
   </div>
