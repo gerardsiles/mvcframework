@@ -16,16 +16,46 @@ require APPROOT . '/views/includes/navigation.php';
         <button type="submit" name="semana" value="POST" method="POST">Horarios de la semana</button>
         <button type="submit" name="mes" value="POST" method="POST">Horarios del mes</button>
        <!-- echo informacion recibida -->
-       <?php foreach($data['horarios'] as $horario): ?>
-        <div class="container-schedule">
-          <p><?= $horario->nombreCurso ?><p>
-          <p><?= $horario->nombreClase ?><p>
-          <p><?= $horario->colorClase ?><p>
-          <p><?= $horario->horaInicio ?><p>
-          <p><?= $horario->horaFin ?><p>
+       <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del curso</th>
+                            <th>Nombre de la clase</th>
+                            <th>Color de la clase</th>
+                            <th>Hora de inicio</th>
+                            <th>Hora de fin</th>
 
-        </div>
-       <?php endforeach; ?>
-    </div>
+
+                        </tr>
+                    </thead>
+
+                        <tbody>
+
+                        <?php foreach ($data['horarios'] as $horario): ?>
+                                    <tr>
+
+                                        <th><?=$horario->nombreCurso?></th>
+
+                                        <td >
+                                        <?=$horario->nombreClase?>
+                                        </td>
+
+                                        <td>
+                                        <?=$horario->colorClase?>
+                                        </td>
+
+                                        <td>
+                                        <?=$horario->horaInicio?>
+                                        </td>
+
+                                        <td>
+                                        <?=$horario->horaFin?>
+                                        </td>
+
+                                        <?php endforeach;?>
+                                    </tr>
+                        </tbody>
+        </table>
+
   </div>
 </div>

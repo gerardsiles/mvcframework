@@ -109,14 +109,14 @@
          }
         }*/
             
-    public function findAllTeachers()
-    {
-        $this->db->query('SELECT * FROM users WHERE user_type = "teacher"');
-
-        $results = $this->db->resultSet();
-
-        return $results;
-    }        
+         public function findAllTeachers()
+         {
+             $this->db->query('SELECT * FROM users WHERE user_type = "teacher"');
+     
+             $results = $this->db->resultSet();
+     
+             return $results;
+         }        
 
     /* Cambiar el nombre de usuario */
     public function changeUsername($data) {
@@ -159,10 +159,11 @@
       } else {
         return false;
       }
-    }
+  }
 
-    /* Devolver el horario del dia */
-    public function findScheduleDay($id){
+
+     /* Devolver el horario del dia */
+     public function findScheduleDay($id){
       $this->db->query('SELECT u.name AS nombreUsuario,
       co.name AS nombreCurso,
       cl.name AS nombreClase,
@@ -176,7 +177,6 @@
       INNER JOIN courses AS co ON co.id_course = e.id_course
       INNER JOIN class AS cl ON cl.id_course = co.id_course
       INNER JOIN schedule AS s ON  s.id_class = cl.id_class
-
       WHERE e.status = 1 
       AND u.id= :id
       AND co.active = 1
