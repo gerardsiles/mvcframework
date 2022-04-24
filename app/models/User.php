@@ -183,7 +183,6 @@
       AND u.id= :id
       AND co.active = 1
       AND s.day = CURDATE()');
-      // $this->db->query('SELECT * FROM `users`');
 
       $this->db->bind(':id', $id);
 
@@ -192,12 +191,58 @@
     }
 
     /* Devolver el horario de la semana */
-    public function findScheduleWeek(){
-      // TODO
+    public function findScheduleWeek($id){
+      $this->db->query('SELECT 
+      s.day AS diaClase,
+      u.name AS nombreUsuario,
+      co.name AS nombreCurso,
+      cl.name AS nombreClase,
+      cl.color AS colorClase,
+      s.time_start AS horaInicio,
+      s.time_end AS horaFin
+      
+    
+      FROM enrollment AS e
+      INNER JOIN users AS u ON u.id = e.id
+      INNER JOIN courses AS co ON co.id_course = e.id_course
+      INNER JOIN class AS cl ON cl.id_course = co.id_course
+      INNER JOIN schedule AS s ON  s.id_class = cl.id_class
+      WHERE e.status = 1 
+      AND u.id= :id
+      AND co.active = 1
+      AND s.day BETWEEN CURDATE() AND (CURDATE()+ INTERVAL 1 WEEK)');
+
+      $this->db->bind(':id', $id);
+
+      $results = $this->db->resultSet();
+      return $results;
     }
 
     /* Devolver el horario del mes */
-    public function findScheduleMonth(){
-      // TODO
+    public function findScheduleMonth($id){
+      $this->db->query('SELECT 
+      s.day AS diaClase,
+      u.name AS nombreUsuario,
+      co.name AS nombreCurso,
+      cl.name AS nombreClase,
+      cl.color AS colorClase,
+      s.time_start AS horaInicio,
+      s.time_end AS horaFin
+      
+    
+      FROM enrollment AS e
+      INNER JOIN users AS u ON u.id = e.id
+      INNER JOIN courses AS co ON co.id_course = e.id_course
+      INNER JOIN class AS cl ON cl.id_course = co.id_course
+      INNER JOIN schedule AS s ON  s.id_class = cl.id_class
+      WHERE e.status = 1 
+      AND u.id= :id
+      AND co.active = 1
+      AND s.day BETWEEN CURDATE() AND (CURDATE()+ INTERVAL 1 MONTH)');
+
+      $this->db->bind(':id', $id);
+
+      $results = $this->db->resultSet();
+      return $results;
     }
  }

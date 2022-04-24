@@ -357,9 +357,12 @@ class Users extends Controller
       }
       if($_POST['semana']) {
         $data['horarios'] =  $this->userModel->findScheduleWeek($userID);
+        echo('semana');
       }
       if($_POST['mes']) {
         $data['horarios'] =  $this->userModel->findScheduleMonth($userID);
+        echo('mes');
+
       }
     }
     $this->view('users/schedule', $data);
