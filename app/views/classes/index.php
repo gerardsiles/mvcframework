@@ -73,7 +73,7 @@ require APPROOT . '/views/includes/navigation.php';
 
         <div>
 
-<a href="<?=URLROOT;?>/classes/addClass"><input type="button" value="Crear una clase"></a>
+<a href="<?=URLROOT;?>/classes/addClass"><input class="button" type="button" value="Crear una clase"></a>
 
 </div>
     </div>

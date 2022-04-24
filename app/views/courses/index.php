@@ -11,7 +11,7 @@ require APPROOT . '/views/includes/navigation.php';
     <div class="container-login">
         <div class="wrapper-login">
         <table>
-                    <thead>
+                    <thead >
                         <tr>
                             <th>Id_Course</th>
                             <th>Name</th>
@@ -72,7 +72,7 @@ require APPROOT . '/views/includes/navigation.php';
 
         <div>
 
-<a href="<?=URLROOT;?>/courses/addCourse"><input type="button" value="Crear un curso"></a>
+<a href="<?=URLROOT;?>/courses/addCourse"><input class="button" type="button" value="Crear un curso"></a>
 
 </div>
     </div>

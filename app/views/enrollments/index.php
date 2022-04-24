@@ -10,7 +10,7 @@ require APPROOT . '/views/includes/navigation.php';
 
     <div class="container-login">
         <div class="wrapper-login">
-        <table>
+        <table >
                     <thead>
                         <tr>
                             <th>Id_Enrollment</th>
@@ -64,7 +64,7 @@ require APPROOT . '/views/includes/navigation.php';
 
         <div>
 
-<a href="<?=URLROOT;?>/enrollments/addEnrollment"><input type="button" value="Crear una matriculacion"></a>
+<a href="<?=URLROOT;?>/enrollments/addEnrollment"><input class="button" type="button" value="Crear una matriculacion"></a>
 
 </div>
     </div>

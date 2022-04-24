@@ -69,7 +69,8 @@ require APPROOT . '/views/includes/navigation.php';
 
         <div>
 
-<a href="<?=URLROOT;?>/schedules/addSchedule"><input type="button" value="Crear un horario"></a>
+
+<a href="<?=URLROOT;?>/schedules/addSchedule"><input class="button" type="button" value="Crear un horario"></a>
 
 </div>
     </div>
