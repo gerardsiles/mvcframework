@@ -164,7 +164,9 @@
 
      /* Devolver el horario del dia */
      public function findScheduleDay($id){
-      $this->db->query('SELECT u.name AS nombreUsuario,
+      $this->db->query('SELECT 
+      s.day AS diaClase,
+      u.name AS nombreUsuario,
       co.name AS nombreCurso,
       cl.name AS nombreClase,
       cl.color AS colorClase,
