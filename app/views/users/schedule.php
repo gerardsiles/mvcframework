@@ -19,6 +19,7 @@ require APPROOT . '/views/includes/navigation.php';
        <table>
           <thead>
             <tr>
+            <th>Día de la clase</th>
             <th>Nombre del curso</th>
             <th>Nombre de la clase</th>
             <th>Color de la clase</th>
@@ -32,7 +33,11 @@ require APPROOT . '/views/includes/navigation.php';
             <?php foreach ($data['horarios'] as $horario): ?>
               <tr>
 
-              <th><?=$horario->nombreCurso?></th>
+              <th><?=$horario->diaClase?></th>
+
+              <td >
+              <?=$horario->nombreCurso?>
+              </td>
 
               <td >
               <?=$horario->nombreClase?>
