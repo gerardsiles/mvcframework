@@ -8,8 +8,8 @@ require APPROOT . '/views/includes/navigation.php';
 ?>
 </div>
 
-<div class="container-login">
-  <div class="wrapper-login">
+<div class="container-schedule">
+  <div class="wrapper-schedule">
     <div>
        <h3>Horarios de clases</h3>
         <button type="submit" name="dia" value="POST" method="POST">Horarios de hoy</button>
@@ -18,9 +18,14 @@ require APPROOT . '/views/includes/navigation.php';
        <!-- echo informacion recibida -->
        <?php foreach($data['horarios'] as $horario): ?>
         <div class="container-schedule">
-          <p><?= $horario; ?><p>
+          <p><?= $horario->nombreCurso ?><p>
+          <p><?= $horario->nombreClase ?><p>
+          <p><?= $horario->colorClase ?><p>
+          <p><?= $horario->horaInicio ?><p>
+          <p><?= $horario->horaFin ?><p>
+
         </div>
-       <?php endforeach ?>
+       <?php endforeach; ?>
     </div>
   </div>
 </div>

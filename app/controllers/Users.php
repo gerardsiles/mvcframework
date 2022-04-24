@@ -345,20 +345,21 @@ class Users extends Controller
   }
 
   public function schedule() {
-    $horarios = $this->userModel->findScheduleDay();
+    $userID = $_SESSION['user_id'];
+    $horarios = $this->userModel->findScheduleDay($userID);
     $data = [
       'horarios' => $horarios,
     ];
     // Cargar horarios de hoy
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if($_POST['dia']) {
-        $data['horarios'] =  $this->userModel->findScheduleDay();
+        $data['horarios'] =  $this->userModel->findScheduleDay($userID);
       }
       if($_POST['semana']) {
-        $data['horarios'] =  $this->userModel->findScheduleWeek();
+        $data['horarios'] =  $this->userModel->findScheduleWeek($userID);
       }
       if($_POST['mes']) {
-        $data['horarios'] =  $this->userModel->findScheduleMonth();
+        $data['horarios'] =  $this->userModel->findScheduleMonth($userID);
       }
     }
     $this->view('users/schedule', $data);
