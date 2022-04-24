@@ -14,7 +14,7 @@
         <li>
             <?php if(isset($_SESSION['user_type'])) : ?>
                 <?php if($_SESSION['user_type'] == 'student' || $_SESSION['user_type'] == 'teacher') : ?>
-                    <a href="<?= URLROOT; ?>/shcedules/index">Horarios</a>
+                    <a href="<?= URLROOT; ?>/users/schedule">Horarios</a>
                 <?php endif; ?>
             <?php endif; ?>
         </li>

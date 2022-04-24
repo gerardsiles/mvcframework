@@ -109,14 +109,14 @@
          }
         }*/
             
-         public function findAllTeachers()
-         {
-             $this->db->query('SELECT * FROM users WHERE user_type = "teacher"');
-     
-             $results = $this->db->resultSet();
-     
-             return $results;
-         }        
+    public function findAllTeachers()
+    {
+        $this->db->query('SELECT * FROM users WHERE user_type = "teacher"');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }        
 
     /* Cambiar el nombre de usuario */
     public function changeUsername($data) {
@@ -159,5 +159,20 @@
       } else {
         return false;
       }
-  }
-}
+    }
+
+    /* Devolver el horario del dia */
+    public function findScheduleDay(){
+      // TODO
+    }
+
+    /* Devolver el horario de la semana */
+    public function findScheduleWeek(){
+      // TODO
+    }
+
+    /* Devolver el horario del mes */
+    public function findScheduleMonth(){
+      // TODO
+    }
+ }

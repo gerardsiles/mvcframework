@@ -343,4 +343,24 @@ class Users extends Controller
     } 
     $this->view('users/username', $data);
   }
+
+  public function schedule() {
+    $horarios = $this->userModel->findScheduleDay();
+    $data = [
+      'horarios' => $horarios,
+    ];
+    // Cargar horarios de hoy
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      if($_POST['dia']) {
+        $data['horarios'] =  $this->userModel->findScheduleDay();
+      }
+      if($_POST['semana']) {
+        $data['horarios'] =  $this->userModel->findScheduleWeek();
+      }
+      if($_POST['mes']) {
+        $data['horarios'] =  $this->userModel->findScheduleMonth();
+      }
+    }
+    $this->view('users/schedule', $data);
+  }
 }
